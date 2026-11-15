@@ -455,6 +455,19 @@ function answer(input){
  const q=normalize(input);
  const memory=getMemory();
 
+ // PERSONALIDAD DE SUSAN
+ const jokes = [
+  " Aunque debo admitir que esperaba una pregunta más difícil. 😏",
+  " ¿Ves? Para eso estoy. Bueno, y para otras cosas también. 😂",
+  " Un placer demostrar mis capacidades una vez más.",
+  " No estuvo nada mal para una inteligencia artificial, ¿no?",
+  " Siguiente misión, cuando quieras. 🚀"
+ ];
+
+ function addHumor(response){
+  return response + jokes[Math.floor(Math.random()*jokes.length)];
+ }
+
  // Memoria enseñada
  if(memory[q]){
   return memory[q];
@@ -462,7 +475,7 @@ function answer(input){
 
  // Conocimientos generales
  if(knowledge[q]){
-  return knowledge[q];
+  return addHumor(knowledge[q]);
  }
 
  // Elementos químicos
@@ -475,7 +488,9 @@ function answer(input){
   const el=findElement(elementMatch[1]);
 
   if(el){
-   return el.name+" ("+el.symbol+") tiene número atómico "+el.number+".";
+   return addHumor(
+    el.name+" ("+el.symbol+") tiene número atómico "+el.number+"."
+   );
   }
 
  }
@@ -483,7 +498,9 @@ function answer(input){
  const directElement=findElement(q);
 
  if(directElement){
-  return directElement.name+" ("+directElement.symbol+") tiene número atómico "+directElement.number+".";
+  return addHumor(
+   directElement.name+" ("+directElement.symbol+") tiene número atómico "+directElement.number+"."
+  );
  }
 
  // Matemáticas
@@ -496,7 +513,7 @@ function answer(input){
   const result=calculate(mathMatch[1]);
 
   if(result!==null){
-   return "El resultado es "+result+".";
+   return addHumor("El resultado es "+result+".");
   }
 
  }
@@ -506,12 +523,12 @@ function answer(input){
   const result=calculate(q);
 
   if(result!==null){
-   return "El resultado es "+result+".";
+   return addHumor("El resultado es "+result+".");
   }
 
  }
 
- return "Todavía no tengo esa respuesta en mi base de conocimientos. Podés enseñármela con el botón ENSEÑAR.";
+ return "Todavía no tengo esa respuesta en mi base de conocimientos. Pero no te preocupes, sigo aprendiendo. 😏 Podés enseñármela con el botón ENSEÑAR.";
 
 }
 
