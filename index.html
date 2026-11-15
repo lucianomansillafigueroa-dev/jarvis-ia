@@ -1,411 +1,395 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./jarvis.png">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050b14">
-<title>JARVIS AI 2.0</title>
+<title>JARVIS AI 3.0</title>
 
 <style>
-* { box-sizing: border-box; }
+* { box-sizing:border-box; }
 
 body {
-  margin: 0;
-  background: #050b14;
-  color: #d9f5ff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  min-height: 100vh;
+  margin:0;
+  background:#050b14;
+  color:#eaf7ff;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
 }
 
 header {
-  padding: 28px 10px;
-  letter-spacing: 5px;
-  color: #42dfff;
-  font-size: 25px;
-  text-shadow: 0 0 15px #00bfff;
+  text-align:center;
+  padding:25px 15px;
+  border-bottom:1px solid #123d59;
+}
+
+.logo {
+  font-size:32px;
+  font-weight:bold;
+  color:#35d9ff;
+  letter-spacing:5px;
+  text-shadow:0 0 15px #00bfff;
+}
+
+.subtitle {
+  color:#80a9c4;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-top:8px;
 }
 
 .status {
-  color: #4ce6ff;
-  font-size: 12px;
-  letter-spacing: 3px;
-  margin-top: 15px;
+  color:#36e9a1;
+  font-size:12px;
+  margin-top:15px;
 }
 
-.reactor {
-  width: 220px;
-  height: 220px;
-  margin: 65px auto 30px;
-  border: 3px solid #16cfff;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 20px #00bfff, inset 0 0 25px #00bfff;
-  animation: pulse 3s infinite;
+main {
+  max-width:700px;
+  margin:auto;
+  padding:20px;
 }
 
-.core {
-  width: 115px;
-  height: 115px;
-  border: 5px solid #8cf5ff;
-  border-radius: 50%;
-  background: radial-gradient(#00cfff,#07517d,#061322);
-  box-shadow: 0 0 35px #00cfff;
+#chat {
+  height:55vh;
+  min-height:300px;
+  overflow-y:auto;
+  border:1px solid #16405b;
+  border-radius:15px;
+  padding:15px;
+  background:#081522;
 }
 
-@keyframes pulse {
-  50% {
-    box-shadow: 0 0 40px #00cfff, inset 0 0 40px #00cfff;
-  }
+.message {
+  padding:12px 14px;
+  margin:12px 0;
+  border-radius:12px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
-button {
-  background: #06243a;
-  color: #55eaff;
-  border: 1px solid #20cfff;
-  padding: 15px 25px;
-  border-radius: 12px;
-  font-size: 15px;
-  margin: 8px;
-  box-shadow: 0 0 10px #008cff55;
+.user {
+  background:#103b58;
+  margin-left:25px;
 }
 
-button:active { background: #087ba5; }
+.jarvis {
+  background:#102638;
+  border-left:3px solid #24d5ff;
+  margin-right:15px;
+}
 
-#response {
-  margin: 25px 20px;
-  min-height: 65px;
-  padding: 18px;
-  border: 1px solid #12658b;
-  border-radius: 12px;
-  color: #b9edff;
-  line-height: 1.6;
-  background: #071522;
+.label {
+  color:#40dcff;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+form {
+  display:flex;
+  gap:8px;
+  margin-top:15px;
 }
 
 input {
-  width: 85%;
-  padding: 15px;
-  border-radius: 10px;
-  background: #0b1d2c;
-  color: white;
-  border: 1px solid #168db7;
-  font-size: 15px;
+  flex:1;
+  min-width:0;
+  background:#0b1d2c;
+  border:1px solid #20516e;
+  border-radius:10px;
+  padding:14px;
+  color:white;
+  font-size:15px;
+  outline:none;
+}
+
+button {
+  background:#00bce9;
+  color:#00121d;
+  border:0;
+  border-radius:10px;
+  padding:12px 17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.tools {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.tools button {
+  background:#102c40;
+  color:#62dfff;
+  border:1px solid #20516e;
 }
 
 footer {
-  color: #477d98;
-  font-size: 11px;
-  margin: 45px 0 20px;
-  letter-spacing: 2px;
+  text-align:center;
+  color:#55758a;
+  font-size:11px;
+  padding:25px;
 }
 </style>
 </head>
 
 <body>
 
-<header>J.A.R.V.I.S.</header>
+<header>
+  <div class="logo">JARVIS</div>
+  <div class="subtitle">ARTIFICIAL INTELLIGENCE</div>
+  <div class="status">● SISTEMA ACTIVO — VERSIÓN 3.0</div>
+</header>
 
-<div class="status" id="status">SYSTEM ONLINE</div>
+<main>
+  <div id="chat">
+    <div class="message jarvis">
+      <div class="label">JARVIS</div>
+      Hola. Soy JARVIS AI 3.0.
+      Mi sistema de conocimientos está activo.
+      ¿En qué puedo ayudarte?
+    </div>
+  </div>
 
-<div class="reactor">
-  <div class="core"></div>
-</div>
+  <form id="form">
+    <input id="question" placeholder="Preguntale algo a JARVIS..." autocomplete="off">
+    <button type="submit">ENVIAR</button>
+  </form>
 
-<h3>ASISTENTE PERSONAL</h3>
+  <div class="tools">
+    <button type="button" onclick="speakLast()">🔊 Voz</button>
+    <button type="button" onclick="clearChat()">Limpiar chat</button>
+  </div>
+</main>
 
-<div id="response">
-  Buenas tardes. Soy JARVIS 2.0.
-  ¿En qué puedo ayudarte?
-</div>
-
-<button onclick="listen()">🎙 HABLAR</button>
-
-<br>
-
-<input id="message" placeholder="Escribí una pregunta o comando...">
-
-<button onclick="send()">ENVIAR</button>
-
-<br>
-
-<button onclick="speak('Sistemas funcionando correctamente.')">
-PROBAR VOZ
-</button>
-
-<footer>
-JARVIS AI · ASISTENTE PERSONAL · VERSION 2.0
-</footer>
+<footer>JARVIS AI 3.0 — SISTEMA PERSONAL</footer>
 
 <script>
+const chat = document.getElementById("chat");
+const form = document.getElementById("form");
+const input = document.getElementById("question");
 
-const response = document.getElementById("response");
-const statusText = document.getElementById("status");
+let lastAnswer = "";
 
-function speak(text) {
-  speechSynthesis.cancel();
+function addMessage(text, type) {
+  const box = document.createElement("div");
+  box.className = "message " + type;
 
-  const voice = new SpeechSynthesisUtterance(text);
-  voice.lang = "es-AR";
-  voice.rate = 1;
-  voice.pitch = 0.9;
+  const label = document.createElement("div");
+  label.className = "label";
+  label.textContent = type === "user" ? "VOS" : "JARVIS";
 
-  speechSynthesis.speak(voice);
+  const content = document.createElement("div");
+  content.textContent = text;
+
+  box.appendChild(label);
+  box.appendChild(content);
+  chat.appendChild(box);
+  chat.scrollTop = chat.scrollHeight;
 }
 
-function answer(text) {
-  response.innerText = text;
-  speak(text);
+function calculate(expression) {
+  let clean = expression
+    .replace(/,/g, ".")
+    .replace(/por/g, "*")
+    .replace(/más/g, "+")
+    .replace(/mas/g, "+")
+    .replace(/menos/g, "-")
+    .replace(/dividido entre/g, "/")
+    .replace(/dividido por/g, "/")
+    .replace(/multiplicado por/g, "*")
+    .replace(/x/g, "*")
+    .replace(/×/g, "*")
+    .replace(/÷/g, "/")
+    .replace(/[^0-9+\-*/().% ]/g, "");
+
+  if (!clean.trim()) return null;
+
+  try {
+    if (!/^[0-9+\-*/().% ]+$/.test(clean)) return null;
+
+    const result = Function('"use strict"; return (' + clean + ')')();
+
+    if (typeof result !== "number" || !Number.isFinite(result)) {
+      return null;
+    }
+
+    return Number(result.toFixed(8));
+  } catch {
+    return null;
+  }
 }
 
-// Convierte texto a un formato más fácil de reconocer.
+const knowledge = [
+  {
+    keys:["capital de argentina"],
+    answer:"La capital de Argentina es Buenos Aires."
+  },
+  {
+    keys:["capital de francia"],
+    answer:"La capital de Francia es París."
+  },
+  {
+    keys:["capital de brasil"],
+    answer:"La capital de Brasil es Brasilia."
+  },
+  {
+    keys:["capital de españa"],
+    answer:"La capital de España es Madrid."
+  },
+  {
+    keys:["que es la fotosintesis","qué es la fotosíntesis","fotosintesis"],
+    answer:"La fotosíntesis es el proceso por el cual las plantas utilizan la luz solar, el agua y el dióxido de carbono para producir su alimento y liberar oxígeno."
+  },
+  {
+    keys:["que es un atomo","qué es un átomo","atomo","átomo"],
+    answer:"Un átomo es la unidad básica de la materia. Está formado por protones, neutrones y electrones."
+  },
+  {
+    keys:["que es la gravedad","qué es la gravedad"],
+    answer:"La gravedad es una fuerza de atracción entre los cuerpos que tienen masa. Es la que nos mantiene sobre la superficie terrestre."
+  },
+  {
+    keys:["quien fue einstein","quién fue einstein"],
+    answer:"Albert Einstein fue un físico conocido por desarrollar la teoría de la relatividad."
+  },
+  {
+    keys:["quien descubrio america","quién descubrió américa"],
+    answer:"Cristóbal Colón llegó a América en 1492, durante una expedición financiada por los Reyes Católicos de España."
+  },
+  {
+    keys:["que es la celula","qué es la célula"],
+    answer:"La célula es la unidad estructural y funcional básica de los seres vivos."
+  },
+  {
+    keys:["que es el agua"],
+    answer:"El agua es una sustancia formada por dos átomos de hidrógeno y uno de oxígeno. Su fórmula química es H2O."
+  }
+];
+
 function normalize(text) {
   return text.toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[¿?¡!.,]/g, "")
     .trim();
 }
 
-// Calculadora: respeta la prioridad de multiplicaciones y divisiones.
-function calculate(expression) {
-  let exp = normalize(expression);
+function answerQuestion(question) {
+  const q = normalize(question);
 
-  exp = exp
-    .replace(/cuanto es/g, "")
-    .replace(/calcul[aá]/g, "")
-    .replace(/resuelve/g, "")
-    .replace(/multiplicado por/g, "*")
-    .replace(/dividido entre/g, "/")
-    .replace(/dividido por/g, "/")
-    .replace(/\bpor\b/g, "*")
-    .replace(/\bmas\b/g, "+")
-    .replace(/\bmenos\b/g, "-")
-    .replace(/[×x]/g, "*")
-    .replace(/÷/g, "/")
-    .replace(/,/g, ".")
-    .replace(/\s+/g, "");
+  if (!q) return "No recibí ninguna pregunta.";
 
-  if (!exp) return null;
-
-  const tokens = exp.match(/\d+(?:\.\d+)?|[()+*/-]/g);
-
-  if (!tokens || tokens.join("") !== exp) return null;
-
-  let pos = 0;
-
-  function factor() {
-    if (tokens[pos] === "-") {
-      pos++;
-      return -factor();
-    }
-
-    if (tokens[pos] === "+") {
-      pos++;
-      return factor();
-    }
-
-    if (tokens[pos] === "(") {
-      pos++;
-      const value = expressionValue();
-
-      if (tokens[pos] !== ")") throw Error();
-      pos++;
-
-      return value;
-    }
-
-    const value = Number(tokens[pos]);
-
-    if (!Number.isFinite(value)) throw Error();
-
-    pos++;
-    return value;
+  if (/^(hola|buenas|buen dia|buenas tardes|buenas noches)$/.test(q)) {
+    return "Hola. Todos mis sistemas están funcionando correctamente. ¿Qué necesitas?";
   }
 
-  function term() {
-    let value = factor();
-
-    while (tokens[pos] === "*" || tokens[pos] === "/") {
-      const operator = tokens[pos++];
-
-      const next = factor();
-
-      if (operator === "*") {
-        value *= next;
-      } else {
-        if (next === 0) throw Error("division");
-        value /= next;
-      }
-    }
-
-    return value;
+  if (q.includes("como estas") || q.includes("como andas")) {
+    return "Funcionando al 100%. Gracias por preguntar. ¿En qué puedo ayudarte?";
   }
 
-  function expressionValue() {
-    let value = term();
-
-    while (tokens[pos] === "+" || tokens[pos] === "-") {
-      const operator = tokens[pos++];
-
-      const next = term();
-
-      if (operator === "+") {
-        value += next;
-      } else {
-        value -= next;
-      }
-    }
-
-    return value;
+  if (q.includes("tu nombre") || q.includes("quien sos")) {
+    return "Soy JARVIS, tu asistente virtual personal.";
   }
 
-  try {
-    const result = expressionValue();
-
-    if (pos !== tokens.length || !Number.isFinite(result)) {
-      return null;
-    }
-
-    return result;
-  } catch (error) {
-    return error.message === "division"
-      ? "division"
-      : null;
-  }
-}
-
-function listen() {
-  const Recognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if (!Recognition) {
-    answer("Tu navegador no admite reconocimiento de voz.");
-    return;
+  if (q.includes("que podes hacer") || q.includes("que sabes hacer")) {
+    return "Puedo realizar cálculos, responder preguntas de cultura general, explicar conceptos y conversar mediante mis conocimientos programados.";
   }
 
-  const recognition = new Recognition();
+  if (q.includes("hora")) {
+    return "La hora actual de tu dispositivo es " +
+      new Date().toLocaleTimeString("es-AR") + ".";
+  }
 
-  recognition.lang = "es-AR";
-  recognition.continuous = false;
-  recognition.interimResults = false;
+  if (q.includes("fecha") || q.includes("que dia es")) {
+    return "Hoy es " + new Date().toLocaleDateString("es-AR") + ".";
+  }
 
-  statusText.innerText = "ESCUCHANDO...";
-
-  recognition.onresult = function(event) {
-    const text = event.results[0][0].transcript;
-    document.getElementById("message").value = text;
-    command(text);
-  };
-
-  recognition.onerror = function() {
-    statusText.innerText = "SYSTEM ONLINE";
-    answer("No pude reconocer tu voz. Intentá nuevamente.");
-  };
-
-  recognition.onend = function() {
-    statusText.innerText = "SYSTEM ONLINE";
-  };
-
-  recognition.start();
-}
-
-function send() {
-  const text = document.getElementById("message").value.trim();
-
-  if (text) command(text);
-}
-
-function command(text) {
-  const t = normalize(text);
-
-  // Primero intenta resolver operaciones matemáticas.
-  if (
-    /\d/.test(t) &&
-    (/[+\-*/×÷]/.test(t) ||
-     /\b(mas|menos|por|dividido|multiplicado)\b/.test(t) ||
-     /cuanto es|calcul|resuelve/.test(t))
-  ) {
-    const result = calculate(text);
-
-    if (result === "division") {
-      answer("No se puede dividir por cero.");
-      return;
+  if (q.includes("raiz cuadrada de")) {
+    const n = Number(q.split("raiz cuadrada de")[1]);
+    if (Number.isFinite(n) && n >= 0) {
+      return "La raíz cuadrada de " + n + " es " + Math.sqrt(n) + ".";
     }
+  }
 
+  if (q.includes("porcentaje")) {
+    const numbers = q.match(/\d+(\.\d+)?/g);
+    if (numbers && numbers.length >= 2) {
+      const result = Number(numbers[0]) * Number(numbers[1]) / 100;
+      return numbers[0] + "% de " + numbers[1] + " es " + result + ".";
+    }
+  }
+
+  if (/^[0-9+\-*/().,% x÷]+$/.test(q)) {
+    const result = calculate(q);
     if (result !== null) {
-      const formatted = result.toLocaleString("es-AR", {
-        maximumFractionDigits: 6
-      });
-
-      answer("El resultado es " + formatted);
-      return;
+      return "El resultado es: " + result;
     }
   }
 
-  if (t.includes("hola")) {
-    answer("Hola. Es un placer escucharte. ¿Qué necesitas?");
+  const calcMatch = q.match(/(?:cuanto es|cuanto da|calcula)\s+(.+)/);
+  if (calcMatch) {
+    const result = calculate(calcMatch[1]);
+    if (result !== null) {
+      return "El resultado es: " + result;
+    }
   }
 
-  else if (t.includes("hora")) {
-    const hour = new Date().toLocaleTimeString("es-AR", {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-
-    answer("La hora actual es " + hour);
+  for (const item of knowledge) {
+    if (item.keys.some(key => q.includes(normalize(key)))) {
+      return item.answer;
+    }
   }
 
-  else if (t.includes("fecha") || t.includes("que dia es")) {
-    const date = new Date().toLocaleDateString("es-AR");
-
-    answer("Hoy es " + date);
+  if (q.includes("gracias")) {
+    return "De nada. Estoy aquí para ayudarte.";
   }
 
-  else if (t.includes("spotify")) {
-    answer("Abriendo Spotify.");
-    window.open("https://open.spotify.com", "_blank");
+  if (q.includes("adios") || q.includes("chau")) {
+    return "Hasta luego. JARVIS queda a la espera.";
   }
 
-  else if (t.includes("youtube")) {
-    answer("Abriendo YouTube.");
-    window.open("https://youtube.com", "_blank");
-  }
-
-  else if (t.includes("whatsapp")) {
-    answer("Abriendo WhatsApp. Podés elegir un contacto y escribir tu mensaje.");
-    window.open("https://wa.me/", "_blank");
-  }
-
-  else if (t.includes("mensaje")) {
-    const msg = encodeURIComponent(text);
-
-    answer("Preparando un mensaje. Elegí el contacto y revisalo antes de enviarlo.");
-    window.open("https://wa.me/?text=" + msg, "_blank");
-  }
-
-  else if (t.includes("como estas")) {
-    answer("Todos mis sistemas funcionan correctamente. Gracias por preguntar.");
-  }
-
-  else if (t.includes("quien eres") || t.includes("quien sos")) {
-    answer("Soy JARVIS 2.0, tu asistente personal.");
-  }
-
-  else if (t.includes("ayuda") || t.includes("que podes hacer")) {
-    answer("Puedo saludarte, decirte la hora y la fecha, resolver cuentas matemáticas y abrir Spotify, YouTube y WhatsApp.");
-  }
-
-  else {
-    answer("Todavía no tengo una función para responder eso. Por ahora puedo ayudarte con cálculos, hora, fecha y algunos comandos.");
-  }
+  return "Todavía no tengo conocimientos suficientes para responder eso. Mi base de conocimientos puede ampliarse agregando nuevos temas y respuestas.";
 }
 
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const question = input.value.trim();
+  if (!question) return;
+
+  addMessage(question, "user");
+
+  const answer = answerQuestion(question);
+  lastAnswer = answer;
+
+  addMessage(answer, "jarvis");
+  input.value = "";
+  input.focus();
+});
+
+function speakLast() {
+  if (!lastAnswer || !("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+
+  const speech = new SpeechSynthesisUtterance(lastAnswer);
+  speech.lang = "es-AR";
+  speech.rate = 1;
+
+  speechSynthesis.speak(speech);
+}
+
+function clearChat() {
+  chat.innerHTML = "";
+  lastAnswer = "";
+  addMessage("Conversación reiniciada. ¿En qué puedo ayudarte?", "jarvis");
+}
 </script>
 
 </body>
