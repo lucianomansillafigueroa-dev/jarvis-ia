@@ -518,14 +518,13 @@ function sendMessage(){
  if(spotifyMatch){
 
   const song = spotifyMatch[1].trim();
-
   const response = "Abriendo Spotify para buscar: " + song;
 
   lastAnswer = response;
   addMessage(response,"bot");
+  speakLast();
 
   const url = "spotify:search:" + encodeURIComponent(song);
-
   window.location.href = url;
 
   return;
@@ -547,6 +546,7 @@ function sendMessage(){
 
   lastAnswer = response;
   addMessage(response,"bot");
+  speakLast();
 
   if(navigator.share){
 
@@ -576,6 +576,7 @@ function sendMessage(){
 
  lastAnswer = response;
  addMessage(response,"bot");
+ speakLast();
 
 }
 
