@@ -164,6 +164,8 @@ footer{
 }
 /* MASCOTA PIXELADA SUSAN */
 
+/* MASCOTA PIXELADA SUSAN */
+
 #susanPet {
  position: fixed;
  bottom: 25px;
@@ -177,6 +179,8 @@ footer{
  background: #07172b;
  cursor: pointer;
  touch-action: none;
+ -webkit-touch-callout: none;
+ user-select: none;
  z-index: 9999;
  box-shadow: 0 0 18px #00aaff;
  animation: susanFloat 2s ease-in-out infinite;
@@ -187,11 +191,18 @@ footer{
  height: 100%;
  object-fit: contain;
  image-rendering: pixelated;
+ user-select: none;
+ -webkit-user-drag: none;
+ pointer-events: none;
 }
 
 @keyframes susanFloat {
- 0%, 100% { transform: translateY(0); }
- 50% { transform: translateY(-8px); }
+ 0%, 100% {
+  transform: translateY(0);
+ }
+ 50% {
+  transform: translateY(-8px);
+ }
 }
 </style>
 </head>
