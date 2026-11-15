@@ -170,16 +170,22 @@ footer{
  right: 18px;
  width: 75px;
  height: 75px;
+ padding: 0;
+ overflow: hidden;
  border: 2px solid #45caff;
  border-radius: 14px;
  background: #07172b;
- color: white;
- font-size: 38px;
  cursor: pointer;
  z-index: 9999;
  box-shadow: 0 0 18px #00aaff;
- image-rendering: pixelated;
  animation: susanFloat 2s ease-in-out infinite;
+}
+
+#susanPet img {
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+ image-rendering: pixelated;
 }
 
 @keyframes susanFloat {
