@@ -717,10 +717,7 @@ function teach(){
 
 function speakLast(){
 
- if(!lastAnswer){
-  addMessage("Todavía no tengo una respuesta para leer.","bot");
-  return;
- }
+ if(!lastAnswer) return;
 
  if(!("speechSynthesis" in window)){
   addMessage("La lectura por voz no está disponible.","bot");
@@ -732,22 +729,30 @@ function speakLast(){
  const speech = new SpeechSynthesisUtterance(lastAnswer);
 
  speech.lang = "es-AR";
- speech.rate = 0.95;
- speech.pitch = 1.1;
+ speech.rate = 0.90;
+ speech.pitch = 1.05;
  speech.volume = 1;
 
  const voices = speechSynthesis.getVoices();
 
- const spanishVoice = voices.find(voice =>
+ const spanishVoices = voices.filter(voice =>
   voice.lang.toLowerCase().startsWith("es")
  );
 
- if(spanishVoice){
-  speech.voice = spanishVoice;
+ const femaleVoice = spanishVoices.find(voice =>
+  /female|mujer|monica|paulina|helena|sabina/i.test(voice.name)
+ );
+
+ const selectedVoice = femaleVoice || spanishVoices.find(voice =>
+  voice.lang.toLowerCase() === "es-ar"
+ ) || spanishVoices[0];
+
+ if(selectedVoice){
+  speech.voice = selectedVoice;
  }
 
  speechSynthesis.speak(speech);
- speechSynthesis.resume();
+
 }
 
 // =====================================
