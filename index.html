@@ -1088,7 +1088,21 @@ const psychology = {
  "Es la capacidad de analizar información, evaluar evidencias y cuestionar conclusiones antes de aceptarlas."
 
 };
+// INTERACCIÓN CON LA MASCOTA SUSAN
 
+document.getElementById("susanPet")
+ .addEventListener("click", function(){
+
+  const chat = document.getElementById("chat");
+
+  chat.scrollIntoView({
+   behavior: "smooth",
+   block: "center"
+  });
+
+  question.focus();
+
+ });
 </script>
 <!-- MASCOTA FLOTANTE DE SUSAN -->
 <button id="susanPet" aria-label="Abrir SUSAN">
