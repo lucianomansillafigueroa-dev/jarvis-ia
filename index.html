@@ -671,28 +671,85 @@ function clearChat(){
 // =====================================
 // 14. CONECTAR BOTONES
 // =====================================
+// RECONOCIMIENTO DE VOZ
+function startListening(){
 
+ const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+ if(!SpeechRecognition){
+  addMessage(
+   "Tu navegador no admite reconocimiento de voz.",
+   "bot"
+  );
+  return;
+ }
+
+ const recognition = new SpeechRecognition();
+
+ recognition.lang = "es-AR";
+ recognition.continuous = false;
+ recognition.interimResults = false;
+
+ addMessage("Te escucho...", "bot");
+
+ recognition.onresult = function(event){
+
+  const transcript =
+   event.results[0][0].transcript;
+
+  question.value = transcript;
+
+  sendMessage();
+
+ };
+
+ recognition.onerror = function(){
+
+  addMessage(
+   "No pude entenderte. Intentá nuevamente.",
+   "bot"
+  );
+
+ };
+
+ recognition.onend = function(){
+  console.log("Reconocimiento finalizado");
+ };
+
+ try{
+  recognition.start();
+ }catch(error){
+  addMessage("No pude iniciar el micrófono.", "bot");
+ }
+
+}
+
+
+// BOTONES
 document.getElementById("send")
- .addEventListener("click",sendMessage);
+ .addEventListener("click", sendMessage);
 
 document.getElementById("teach")
- .addEventListener("click",teach);
+ .addEventListener("click", teach);
 
 document.getElementById("voice")
- .addEventListener("click",speakLast);
+ .addEventListener("click", startListening);
 
 document.getElementById("clear")
- .addEventListener("click",clearChat);
+ .addEventListener("click", clearChat);
 
-question.addEventListener("keydown",function(event){
 
- if(event.key==="Enter"){
+// ENTER PARA ENVIAR
+question.addEventListener("keydown", function(event){
+
+ if(event.key === "Enter"){
   event.preventDefault();
   sendMessage();
  }
 
 });
-
 </script>
 
 </body>
