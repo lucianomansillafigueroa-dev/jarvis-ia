@@ -1095,10 +1095,64 @@ const psychology = {
  "Es la capacidad de analizar información, evaluar evidencias y cuestionar conclusiones antes de aceptarlas."
 
 };
-// INTERACCIÓN CON LA MASCOTA SUSAN
+// INTERACCIÓN Y MOVIMIENTO DE LA MASCOTA SUSAN
 
-document.getElementById("susanPet")
- .addEventListener("click", function(){
+const susanPet = document.getElementById("susanPet");
+
+let movingSusan = false;
+let movedSusan = false;
+let startX = 0;
+let startY = 0;
+
+susanPet.addEventListener("pointerdown", function(e){
+
+ movingSusan = true;
+ movedSusan = false;
+
+ startX = e.clientX;
+ startY = e.clientY;
+
+ susanPet.setPointerCapture(e.pointerId);
+
+});
+
+susanPet.addEventListener("pointermove", function(e){
+
+ if(!movingSusan) return;
+
+ const dx = e.clientX - startX;
+ const dy = e.clientY - startY;
+
+ if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
+  movedSusan = true;
+ }
+
+ if(movedSusan){
+
+  const rect = susanPet.getBoundingClientRect();
+
+  let left = rect.left + dx;
+  let top = rect.top + dy;
+
+  left = Math.max(0, Math.min(left, window.innerWidth - rect.width));
+  top = Math.max(0, Math.min(top, window.innerHeight - rect.height));
+
+  susanPet.style.left = left + "px";
+  susanPet.style.top = top + "px";
+  susanPet.style.right = "auto";
+  susanPet.style.bottom = "auto";
+
+  startX = e.clientX;
+  startY = e.clientY;
+ }
+
+});
+
+susanPet.addEventListener("pointerup", function(){
+
+ movingSusan = false;
+
+ if(!movedSusan){
 
   const chat = document.getElementById("chat");
 
@@ -1108,8 +1162,13 @@ document.getElementById("susanPet")
   });
 
   question.focus();
+ }
 
- });
+});
+
+susanPet.addEventListener("pointercancel", function(){
+ movingSusan = false;
+});
 </script>
 <!-- MASCOTA FLOTANTE DE SUSAN -->
 <button id="susanPet" aria-label="Abrir SUSAN">
