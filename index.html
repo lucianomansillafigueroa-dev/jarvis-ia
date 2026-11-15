@@ -500,6 +500,7 @@ function addMessage(text,type){
 // =====================================
 // 10. ENVIAR MENSAJES
 // =====================================
+
 function sendMessage(){
 
  const text = question.value.trim();
@@ -509,6 +510,28 @@ function sendMessage(){
  addMessage(text,"user");
  question.value = "";
 
+ // SPOTIFY
+ const spotifyMatch = text.match(
+  /(?:reproduce|reproducí|reproducir|pon[eé]|pone|escucha|escuchá)\s+(?:desde|en)\s+spotify\s+(.+)/i
+ );
+
+ if(spotifyMatch){
+
+  const song = spotifyMatch[1].trim();
+
+  const response = "Abriendo Spotify para buscar: " + song;
+
+  lastAnswer = response;
+  addMessage(response,"bot");
+
+  const url = "spotify:search:" + encodeURIComponent(song);
+
+  window.location.href = url;
+
+  return;
+ }
+
+ // WHATSAPP
  const whatsappMatch = text.match(
   /(?:mandale|enviale|escribile|escribele)\s+a\s+(.+?)\s+que\s+(.+)/i
  );
@@ -548,11 +571,14 @@ function sendMessage(){
   return;
  }
 
+ // RESPUESTA NORMAL
  const response = answer(text);
+
  lastAnswer = response;
  addMessage(response,"bot");
 
 }
+
 // =====================================
 // 11. ENSEÑAR
 // =====================================
