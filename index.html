@@ -642,10 +642,22 @@ function speakLast(){
 
  speechSynthesis.cancel();
 
- const speech=new SpeechSynthesisUtterance(lastAnswer);
+ const speech = new SpeechSynthesisUtterance(lastAnswer);
 
- speech.lang="es-AR";
- speech.rate=1;
+ speech.lang = "es-AR";
+ speech.rate = 0.95;
+ speech.pitch = 1.1;
+ speech.volume = 1;
+
+ const voices = speechSynthesis.getVoices();
+
+ const spanishVoice = voices.find(voice =>
+  voice.lang.toLowerCase().startsWith("es")
+ );
+
+ if(spanishVoice){
+  speech.voice = spanishVoice;
+ }
 
  speechSynthesis.speak(speech);
 
