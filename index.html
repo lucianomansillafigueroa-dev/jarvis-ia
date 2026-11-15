@@ -500,25 +500,59 @@ function addMessage(text,type){
 // =====================================
 // 10. ENVIAR MENSAJES
 // =====================================
-
 function sendMessage(){
 
- const text=question.value.trim();
+ const text = question.value.trim();
 
- if(!text)return;
+ if(!text) return;
 
  addMessage(text,"user");
+ question.value = "";
 
- question.value="";
+ const whatsappMatch = text.match(
+  /(?:mandale|enviale|escribile|escribele)\s+a\s+(.+?)\s+que\s+(.+)/i
+ );
 
- const response=answer(text);
+ if(whatsappMatch){
 
- lastAnswer=response;
+  const contact = whatsappMatch[1].trim();
+  const message = whatsappMatch[2].trim();
 
+  const response =
+   "Preparé el mensaje para " + contact +
+   ". Ahora elegí WhatsApp y después el contacto.";
+
+  lastAnswer = response;
+  addMessage(response,"bot");
+
+  if(navigator.share){
+
+   navigator.share({
+    title: "Mensaje para " + contact,
+    text: message
+   }).catch(error => {
+    if(error.name !== "AbortError"){
+     addMessage("No pude abrir el menú para compartir.", "bot");
+    }
+   });
+
+  } else {
+
+   addMessage(
+    "Tu navegador no permite abrir el menú para compartir.",
+    "bot"
+   );
+
+  }
+
+  return;
+ }
+
+ const response = answer(text);
+ lastAnswer = response;
  addMessage(response,"bot");
 
 }
-
 // =====================================
 // 11. ENSEÑAR
 // =====================================
