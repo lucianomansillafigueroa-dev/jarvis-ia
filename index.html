@@ -5,1090 +5,431 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050b14">
-<title>SUSAN AI 5.0</title>
+<title>SUSAN AI</title>
 
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#050b14;color:#e8f7ff;
- font-family:Arial,sans-serif
+ margin:0;
+ background:#050b14;
+ color:#eaf6ff;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
 }
 header{
- text-align:center;padding:25px 15px;
- border-bottom:1px solid #16405c
+ text-align:center;
+ padding:25px 15px 15px;
+ border-bottom:1px solid #12334b;
 }
 .logo{
- font-size:36px;font-weight:bold;letter-spacing:7px;
- color:#36d9ff;text-shadow:0 0 18px #00bfff
+ font-size:35px;
+ font-weight:bold;
+ letter-spacing:5px;
+ color:#40cfff;
+ text-shadow:0 0 18px #008cff;
 }
-.subtitle{
- color:#789db5;font-size:11px;
- letter-spacing:3px;margin-top:8px
-}
-.status{color:#39e6a5;font-size:12px;margin-top:15px}
-main{max-width:750px;margin:auto;padding:18px}
-.panel{
- background:#091725;border:1px solid #17415c;
- border-radius:14px;padding:15px;margin-bottom:15px
-}
-.panel-title{
- color:#37d9ff;font-size:12px;
- letter-spacing:2px;margin-bottom:10px
-}
+.subtitle{color:#7298b4;font-size:12px;margin-top:7px}
+.status{color:#42e6a4;font-size:12px;margin-top:12px}
+main{max-width:750px;margin:auto;padding:15px}
 #chat{
- height:48vh;min-height:300px;overflow-y:auto;
- padding:12px;background:#07121e;
- border:1px solid #17415c;border-radius:13px
+ height:55vh;
+ min-height:300px;
+ overflow-y:auto;
+ padding:12px;
+ background:#081522;
+ border:1px solid #12334b;
+ border-radius:14px;
 }
 .message{
- padding:13px;margin:10px 0;border-radius:12px;
- line-height:1.5;white-space:pre-wrap;
- overflow-wrap:anywhere
+ padding:12px 14px;
+ margin:10px 0;
+ border-radius:12px;
+ line-height:1.5;
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
 }
-.user{background:#103b59;margin-left:25px}
-.susan{
- background:#102638;border-left:3px solid #28d9ff;
- margin-right:15px
+.bot{
+ background:#10283b;
+ border-left:3px solid #32c8ff;
+ margin-right:25px;
 }
-.label{
- color:#3cdbff;font-size:10px;
- font-weight:bold;margin-bottom:6px
+.user{
+ background:#123b54;
+ border-right:3px solid #32c8ff;
+ margin-left:25px;
+ text-align:right;
 }
-form{display:flex;gap:8px;margin-top:12px}
+.controls{display:flex;gap:8px;margin-top:12px}
 input{
- min-width:0;flex:1;padding:14px;
- background:#0c1d2c;border:1px solid #20516e;
- border-radius:10px;color:white;font-size:15px;
- outline:none
+ flex:1;
+ min-width:0;
+ padding:14px;
+ background:#0c1e2d;
+ color:white;
+ border:1px solid #1c5474;
+ border-radius:10px;
+ outline:none;
+ font-size:15px;
 }
-input:focus{border-color:#31d9ff}
 button{
- padding:12px 15px;border:0;border-radius:9px;
- background:#13bce8;color:#00131d;
- font-weight:bold;cursor:pointer
+ background:#087eae;
+ color:white;
+ border:0;
+ padding:12px 15px;
+ border-radius:10px;
+ font-weight:bold;
+ cursor:pointer;
 }
-.buttons{
- display:flex;flex-wrap:wrap;gap:8px;margin-top:12px
+button:active{opacity:.7}
+.actions{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-top:12px;
 }
-.buttons button{
- background:#102c40;color:#65ddff;
- border:1px solid #20516e
-}
-.small{color:#789bb0;font-size:12px;line-height:1.5}
-footer{text-align:center;color:#56758a;padding:25px;font-size:11px}
-#teachBox{display:none;margin-top:12px}
-#teachBox input{width:100%;margin-bottom:8px}
+.actions button{background:#102c40;border:1px solid #1c5474}
+footer{text-align:center;color:#55758d;font-size:11px;padding:20px}
 </style>
 </head>
 
 <body>
-
 <header>
- <div class="logo">SUSAN</div>
- <div class="subtitle">PERSONAL ARTIFICIAL INTELLIGENCE</div>
- <div class="status">● SISTEMA ACTIVO — VERSIÓN 5.0</div>
+ <div class="logo">SUSAN AI</div>
+ <div class="subtitle">SISTEMA DE ASISTENCIA Y CONOCIMIENTO</div>
+ <div class="status">● SISTEMA EN LÍNEA</div>
 </header>
 
 <main>
-
- <div class="panel">
-  <div class="panel-title">ESTADO DEL SISTEMA</div>
-  <div class="small">
-   Núcleo de conocimientos ampliado.<br>
-   Tabla periódica completa.<br>
-   Motor matemático activo.<br>
-   Memoria de aprendizaje activa.<br>
-   Sistema de voz disponible.
-  </div>
- </div>
-
  <div id="chat">
-  <div class="message susan">
-   <div class="label">SUSAN AI 5.0</div>
-   Hola. Soy Susan, tu asistente virtual.
-   Mis sistemas están activos y listos.
+  <div class="message bot">
+   Hola. Soy SUSAN, tu asistente personal.<br>
    ¿En qué puedo ayudarte?
   </div>
  </div>
 
- <form id="form">
-  <input id="question" placeholder="Preguntale algo a Susan..." autocomplete="off">
-  <button type="submit">ENVIAR</button>
- </form>
-
- <div class="buttons">
-  <button type="button" onclick="speakLast()">🔊 ESCUCHAR</button>
-  <button type="button" onclick="clearChat()">LIMPIAR CHAT</button>
-  <button type="button" onclick="toggleTeach()">+ ENSEÑAR</button>
+ <div class="controls">
+  <input id="question" type="text" placeholder="Escribí tu pregunta..."
+   autocomplete="off">
+  <button onclick="sendMessage()">ENVIAR</button>
  </div>
 
- <div id="teachBox" class="panel">
-  <div class="panel-title">ENSEÑAR A SUSAN</div>
-  <input id="newQuestion" placeholder="Escribí una pregunta">
-  <input id="newAnswer" placeholder="Escribí la respuesta">
-  <button type="button" onclick="teachSusan()">GUARDAR CONOCIMIENTO</button>
-  <p class="small">Los conocimientos se guardan en este navegador.</p>
+ <div class="actions">
+  <button onclick="teach()">ENSEÑAR</button>
+  <button onclick="speakLast()">🔊 VOZ</button>
+  <button onclick="clearChat()">LIMPIAR</button>
  </div>
-
 </main>
 
-<footer>SUSAN AI 5.0 — SISTEMA PERSONAL</footer>
+<footer>SUSAN AI 6.0 · ASISTENTE PERSONAL</footer>
 
 <script>
-
-// ==========================================
-// 1. CONFIGURACIÓN
-// ==========================================
+// ==================================
+// 1. ELEMENTOS DE LA INTERFAZ
+// ==================================
 
 const chat = document.getElementById("chat");
-const input = document.getElementById("question");
+const question = document.getElementById("question");
+
 let lastAnswer = "";
 
-// ==========================================
-// 2. NORMALIZAR TEXTO
-// ==========================================
+// ==================================
+// 2. BASE DE CONOCIMIENTOS
+// ==================================
+
+const knowledge = {
+ "hola": "Hola. ¿En qué puedo ayudarte?",
+ "buenos dias": "¡Buenos días! Estoy lista para ayudarte.",
+ "buenas tardes": "¡Buenas tardes! ¿Qué necesitás?",
+ "buenas noches": "¡Buenas noches! ¿En qué puedo ayudarte?",
+ "como estas": "Estoy funcionando correctamente. Gracias por preguntar.",
+ "quien sos": "Soy SUSAN AI, un asistente personal creado para responder preguntas y aprender nuevos conocimientos.",
+ "quien te creo": "Fui creada por Luciano.",
+ "que podes hacer": "Puedo responder preguntas de cultura general, resolver cálculos, buscar información en mi base de conocimientos y aprender respuestas nuevas.",
+ "que es la inteligencia artificial": "La inteligencia artificial es una tecnología que permite que los sistemas informáticos realicen tareas que normalmente requieren capacidades humanas, como reconocer patrones, procesar lenguaje y resolver problemas.",
+ "que es un atomo": "Un átomo es la unidad básica de la materia. Está formado por protones, neutrones y electrones.",
+ "que es la gravedad": "La gravedad es una fuerza de atracción entre los cuerpos que tienen masa.",
+ "que es la fotosintesis": "La fotosíntesis es el proceso por el cual las plantas utilizan la luz solar, el agua y el dióxido de carbono para producir alimento y liberar oxígeno.",
+ "que es el adn": "El ADN es la molécula que contiene la información genética de los seres vivos.",
+ "capital de argentina": "La capital de Argentina es Buenos Aires.",
+ "capital de alemania": "La capital de Alemania es Berlín.",
+ "capital de francia": "La capital de Francia es París.",
+ "capital de españa": "La capital de España es Madrid.",
+ "capital de italia": "La capital de Italia es Roma.",
+ "capital de brasil": "La capital de Brasil es Brasilia.",
+ "capital de chile": "La capital de Chile es Santiago.",
+ "capital de uruguay": "La capital de Uruguay es Montevideo.",
+ "capital de paraguay": "La capital de Paraguay es Asunción.",
+ "capital de japon": "La capital de Japón es Tokio.",
+ "capital de china": "La capital de China es Pekín.",
+ "capital de rusia": "La capital de Rusia es Moscú.",
+ "capital de reino unido": "La capital del Reino Unido es Londres.",
+ "capital de estados unidos": "La capital de Estados Unidos es Washington D. C.",
+ "capital de mexico": "La capital de México es Ciudad de México.",
+ "capital de canada": "La capital de Canadá es Ottawa.",
+ "capital de australia": "La capital de Australia es Canberra.",
+ "capital de portugal": "La capital de Portugal es Lisboa.",
+ "capital de colombia": "La capital de Colombia es Bogotá.",
+ "capital de peru": "La capital de Perú es Lima.",
+ "capital de bolivia": "La capital de Bolivia es Sucre. La sede del gobierno está en La Paz.",
+ "capital de egipto": "La capital de Egipto es El Cairo.",
+ "capital de india": "La capital de India es Nueva Delhi.",
+ "capital de corea del sur": "La capital de Corea del Sur es Seúl.",
+ "capital de noruega": "La capital de Noruega es Oslo.",
+ "capital de suecia": "La capital de Suecia es Estocolmo.",
+ "capital de grecia": "La capital de Grecia es Atenas.",
+ "capital de turquia": "La capital de Turquía es Ankara.",
+ "capital de suiza": "La capital de Suiza es Berna."
+};
+
+// ==================================
+// 3. TABLA PERIÓDICA
+// ==================================
+
+const elements = [
+["Hidrógeno","H"],["Helio","He"],["Litio","Li"],["Berilio","Be"],
+["Boro","B"],["Carbono","C"],["Nitrógeno","N"],["Oxígeno","O"],
+["Flúor","F"],["Neón","Ne"],["Sodio","Na"],["Magnesio","Mg"],
+["Aluminio","Al"],["Silicio","Si"],["Fósforo","P"],["Azufre","S"],
+["Cloro","Cl"],["Argón","Ar"],["Potasio","K"],["Calcio","Ca"],
+["Escandio","Sc"],["Titanio","Ti"],["Vanadio","V"],["Cromo","Cr"],
+["Manganeso","Mn"],["Hierro","Fe"],["Cobalto","Co"],["Níquel","Ni"],
+["Cobre","Cu"],["Zinc","Zn"],["Galio","Ga"],["Germanio","Ge"],
+["Arsénico","As"],["Selenio","Se"],["Bromo","Br"],["Kriptón","Kr"],
+["Rubidio","Rb"],["Estroncio","Sr"],["Itrio","Y"],["Circonio","Zr"],
+["Niobio","Nb"],["Molibdeno","Mo"],["Tecnecio","Tc"],["Rutenio","Ru"],
+["Rodio","Rh"],["Paladio","Pd"],["Plata","Ag"],["Cadmio","Cd"],
+["Indio","In"],["Estaño","Sn"],["Antimonio","Sb"],["Telurio","Te"],
+["Yodo","I"],["Xenón","Xe"],["Cesio","Cs"],["Bario","Ba"],
+["Lantano","La"],["Cerio","Ce"],["Praseodimio","Pr"],["Neodimio","Nd"],
+["Prometio","Pm"],["Samario","Sm"],["Europio","Eu"],["Gadolinio","Gd"],
+["Terbio","Tb"],["Disprosio","Dy"],["Holmio","Ho"],["Erbio","Er"],
+["Tulio","Tm"],["Iterbio","Yb"],["Lutecio","Lu"],["Hafnio","Hf"],
+["Tantalio","Ta"],["Wolframio","W"],["Renio","Re"],["Osmio","Os"],
+["Iridio","Ir"],["Platino","Pt"],["Oro","Au"],["Mercurio","Hg"],
+["Talio","Tl"],["Plomo","Pb"],["Bismuto","Bi"],["Polonio","Po"],
+["Astato","At"],["Radón","Rn"],["Francio","Fr"],["Radio","Ra"],
+["Actinio","Ac"],["Torio","Th"],["Protactinio","Pa"],["Uranio","U"],
+["Neptunio","Np"],["Plutonio","Pu"],["Americio","Am"],["Curio","Cm"],
+["Berkelio","Bk"],["Californio","Cf"],["Einsteinio","Es"],["Fermio","Fm"],
+["Mendelevio","Md"],["Nobelio","No"],["Lawrencio","Lr"],["Rutherfordio","Rf"],
+["Dubnio","Db"],["Seaborgio","Sg"],["Bohrio","Bh"],["Hassio","Hs"],
+["Meitnerio","Mt"],["Darmstadtio","Ds"],["Roentgenio","Rg"],["Copernicio","Cn"],
+["Nihonio","Nh"],["Flerovio","Fl"],["Moscovio","Mc"],["Livermorio","Lv"],
+["Teneso","Ts"],["Oganesón","Og"]
+];
+
+function findElement(query){
+ const q = normalize(query);
+ for(let i=0;i<elements.length;i++){
+  const name=normalize(elements[i][0]);
+  const symbol=normalize(elements[i][1]);
+  if(q===name || q===symbol || q===String(i+1)){
+   return {
+    name:elements[i][0],
+    symbol:elements[i][1],
+    number:i+1
+   };
+  }
+ }
+ return null;
+}
+
+// ==================================
+// 4. NORMALIZAR TEXTO
+// ==================================
 
 function normalize(text){
- return String(text).toLowerCase()
+ return String(text)
+  .toLowerCase()
   .normalize("NFD")
   .replace(/[\u0300-\u036f]/g,"")
-  .replace(/[¿?¡!.,;:]/g,"")
-  .replace(/\s+/g," ")
+  .replace(/[¿?¡!,.;:]/g,"")
   .trim();
 }
 
-// ==========================================
-// 3. MENSAJES
-// ==========================================
-
-function addMessage(text,type){
- const box=document.createElement("div");
- box.className="message "+type;
-
- const label=document.createElement("div");
- label.className="label";
- label.textContent=type==="user"?"VOS":"SUSAN";
-
- const content=document.createElement("div");
- content.textContent=text;
-
- box.appendChild(label);
- box.appendChild(content);
- chat.appendChild(box);
- chat.scrollTop=chat.scrollHeight;
-}
-
-// ==========================================
-// 4. CAPITALES DEL MUNDO
-// ==========================================
-
-const capitals={
- "argentina":"Buenos Aires",
- "alemania":"Berlín",
- "francia":"París",
- "españa":"Madrid",
- "italia":"Roma",
- "portugal":"Lisboa",
- "brasil":"Brasilia",
- "uruguay":"Montevideo",
- "chile":"Santiago",
- "paraguay":"Asunción",
- "bolivia":"Sucre",
- "peru":"Lima",
- "colombia":"Bogotá",
- "venezuela":"Caracas",
- "ecuador":"Quito",
- "mexico":"Ciudad de México",
- "estados unidos":"Washington D. C.",
- "canada":"Ottawa",
- "japon":"Tokio",
- "china":"Pekín",
- "india":"Nueva Delhi",
- "rusia":"Moscú",
- "reino unido":"Londres",
- "australia":"Canberra",
- "egipto":"El Cairo",
- "grecia":"Atenas",
- "turquia":"Ankara",
- "corea del sur":"Seúl",
- "paises bajos":"Ámsterdam",
- "belgica":"Bruselas",
- "suiza":"Berna",
- "noruega":"Oslo",
- "suecia":"Estocolmo",
- "finlandia":"Helsinki",
- "dinamarca":"Copenhague",
- "irlanda":"Dublín",
- "austria":"Viena",
- "polonia":"Varsovia",
- "islandia":"Reikiavik",
- "sudafrica":"Pretoria",
- "marruecos":"Rabat",
- "nigeria":"Abuya",
- "kenia":"Nairobi",
- "arabia saudita":"Riad",
- "nueva zelanda":"Wellington",
- "cuba":"La Habana",
- "jamaica":"Kingston",
- "panama":"Ciudad de Panamá",
- "costa rica":"San José",
- "guatemala":"Ciudad de Guatemala",
- "honduras":"Tegucigalpa",
- "el salvador":"San Salvador",
- "nicaragua":"Managua",
- "republica dominicana":"Santo Domingo",
- "afganistan":"Kabul",
- "iran":"Teherán",
- "irak":"Bagdad",
- "pakistan":"Islamabad",
- "tailandia":"Bangkok",
- "vietnam":"Hanói",
- "indonesia":"Yakarta",
- "filipinas":"Manila",
- "singapur":"Singapur",
- "ucrania":"Kiev",
- "croacia":"Zagreb",
- "rumania":"Bucarest",
- "hungria":"Budapest",
- "chequia":"Praga",
- "serbia":"Belgrado",
- "etiopia":"Adís Abeba",
- "ghana":"Acra",
- "senegal":"Dakar",
- "argelia":"Argel",
- "tunez":"Túnez",
- "corea del norte":"Pionyang",
- "malasia":"Kuala Lumpur",
- "nepal":"Katmandú",
- "bangladesh":"Daca",
- "birmania":"Naipyidó",
- "mongolia":"Ulán Bator",
- "catar":"Doha",
- "emiratos arabes unidos":"Abu Dabi",
- "libano":"Beirut",
- "siria":"Damasco",
- "jordania":"Amán",
- "chipre":"Nicosia",
- "eslovaquia":"Bratislava",
- "eslovenia":"Liubliana",
- "albania":"Tirana",
- "bosnia":"Sarajevo",
- "montenegro":"Podgorica",
- "macedonia del norte":"Skopie",
- "estonia":"Tallin",
- "letonia":"Riga",
- "lituania":"Vilna",
- "luxemburgo":"Luxemburgo",
- "malta":"La Valeta",
- "monaco":"Mónaco",
- "andorra":"Andorra la Vieja",
- "liechtenstein":"Vaduz",
- "san marino":"San Marino",
- "vaticano":"Ciudad del Vaticano",
- "madagascar":"Antananarivo",
- "angola":"Luanda",
- "mozambique":"Maputo",
- "zambia":"Lusaka",
- "zimbabue":"Harare",
- "camerun":"Yaundé",
- "uganda":"Kampala",
- "tanzania":"Dodoma",
- "somalia":"Mogadiscio",
- "libia":"Trípoli",
- "mauritania":"Nuakchot",
- "mali":"Bamako",
- "niger":"Niamey",
- "burkina faso":"Uagadugú",
- "costa de marfil":"Yamusukro",
- "gabon":"Libreville",
- "republica del congo":"Brazzaville",
- "republica democratica del congo":"Kinsasa",
- "botsuana":"Gaborone",
- "namibia":"Windhoek",
- "lesoto":"Maseru",
- "esuatini":"Mbabane",
- "guinea":"Conakri",
- "guinea ecuatorial":"Malabo",
- "ruanda":"Kigali",
- "burundi":"Gitega",
- "haiti":"Puerto Príncipe",
- "bahamas":"Nasáu",
- "barbados":"Bridgetown",
- "trinidad y tobago":"Puerto España",
- "belice":"Belmopán",
- "guyana":"Georgetown",
- "surinam":"Paramaribo"
-};
-
-// ==========================================
-// 5. TABLA PERIÓDICA COMPLETA
-// Formato: símbolo|nombre|número|masa
-// ==========================================
-
-const rawElements=`
-H|Hidrógeno|1|1.008
-He|Helio|2|4.0026
-Li|Litio|3|6.94
-Be|Berilio|4|9.0122
-B|Boro|5|10.81
-C|Carbono|6|12.011
-N|Nitrógeno|7|14.007
-O|Oxígeno|8|15.999
-F|Flúor|9|18.998
-Ne|Neón|10|20.180
-Na|Sodio|11|22.990
-Mg|Magnesio|12|24.305
-Al|Aluminio|13|26.982
-Si|Silicio|14|28.085
-P|Fósforo|15|30.974
-S|Azufre|16|32.06
-Cl|Cloro|17|35.45
-Ar|Argón|18|39.948
-K|Potasio|19|39.098
-Ca|Calcio|20|40.078
-Sc|Escandio|21|44.956
-Ti|Titanio|22|47.867
-V|Vanadio|23|50.942
-Cr|Cromo|24|51.996
-Mn|Manganeso|25|54.938
-Fe|Hierro|26|55.845
-Co|Cobalto|27|58.933
-Ni|Níquel|28|58.693
-Cu|Cobre|29|63.546
-Zn|Zinc|30|65.38
-Ga|Galio|31|69.723
-Ge|Germanio|32|72.630
-As|Arsénico|33|74.922
-Se|Selenio|34|78.971
-Br|Bromo|35|79.904
-Kr|Kriptón|36|83.798
-Rb|Rubidio|37|85.468
-Sr|Estroncio|38|87.62
-Y|Itrio|39|88.906
-Zr|Circonio|40|91.224
-Nb|Niobio|41|92.906
-Mo|Molibdeno|42|95.95
-Tc|Tecnecio|43|98
-Ru|Rutenio|44|101.07
-Rh|Rodio|45|102.91
-Pd|Paladio|46|106.42
-Ag|Plata|47|107.87
-Cd|Cadmio|48|112.41
-In|Indio|49|114.82
-Sn|Estaño|50|118.71
-Sb|Antimonio|51|121.76
-Te|Telurio|52|127.60
-I|Yodo|53|126.90
-Xe|Xenón|54|131.29
-Cs|Cesio|55|132.91
-Ba|Bario|56|137.33
-La|Lantano|57|138.91
-Ce|Cerio|58|140.12
-Pr|Praseodimio|59|140.91
-Nd|Neodimio|60|144.24
-Pm|Prometio|61|145
-Sm|Samario|62|150.36
-Eu|Europio|63|151.96
-Gd|Gadolinio|64|157.25
-Tb|Terbio|65|158.93
-Dy|Disprosio|66|162.50
-Ho|Holmio|67|164.93
-Er|Erbio|68|167.26
-Tm|Tulio|69|168.93
-Yb|Iterbio|70|173.05
-Lu|Lutecio|71|174.97
-Hf|Hafnio|72|178.49
-Ta|Tantalio|73|180.95
-W|Wolframio|74|183.84
-Re|Renio|75|186.21
-Os|Osmio|76|190.23
-Ir|Iridio|77|192.22
-Pt|Platino|78|195.08
-Au|Oro|79|196.97
-Hg|Mercurio|80|200.59
-Tl|Talio|81|204.38
-Pb|Plomo|82|207.2
-Bi|Bismuto|83|208.98
-Po|Polonio|84|209
-At|Astato|85|210
-Rn|Radón|86|222
-Fr|Francio|87|223
-Ra|Radio|88|226
-Ac|Actinio|89|227
-Th|Torio|90|232.04
-Pa|Protactinio|91|231.04
-U|Uranio|92|238.03
-Np|Neptunio|93|237
-Pu|Plutonio|94|244
-Am|Americio|95|243
-Cm|Curio|96|247
-Bk|Berkelio|97|247
-Cf|Californio|98|251
-Es|Einsteinio|99|252
-Fm|Fermio|100|257
-Md|Mendelevio|101|258
-No|Nobelio|102|259
-Lr|Lawrencio|103|266
-Rf|Rutherfordio|104|267
-Db|Dubnio|105|268
-Sg|Seaborgio|106|269
-Bh|Bohrio|107|270
-Hs|Hassio|108|277
-Mt|Meitnerio|109|278
-Ds|Darmstadtio|110|281
-Rg|Roentgenio|111|282
-Cn|Copernicio|112|285
-Nh|Nihonio|113|286
-Fl|Flerovio|114|289
-Mc|Moscovio|115|290
-Lv|Livermorio|116|293
-Ts|Teneso|117|294
-Og|Oganesón|118|294
-`;
-
-const elements=rawElements.trim().split("\n").map(line=>{
- const [symbol,name,number,mass]=line.split("|");
- return {
-  symbol,
-  name,
-  number:Number(number),
-  mass:Number(mass)
- };
-});
-
-// ==========================================
-// 6. BASE DE CONOCIMIENTOS
-// ==========================================
-
-const knowledge=[
-
-{
-keys:["fotosintesis"],
-answer:"La fotosíntesis es el proceso por el cual las plantas utilizan luz solar, agua y dióxido de carbono para producir glucosa y liberar oxígeno."
-},
-{
-keys:["atomo"],
-answer:"El átomo es la unidad básica de la materia. Está formado por protones y neutrones en el núcleo, y electrones alrededor."
-},
-{
-keys:["celula"],
-answer:"La célula es la unidad estructural y funcional básica de los seres vivos. Existen células procariotas y eucariotas."
-},
-{
-keys:["gravedad"],
-answer:"La gravedad es una interacción de atracción entre cuerpos con masa. Mantiene los planetas en órbita y nos mantiene sobre la Tierra."
-},
-{
-keys:["sistema solar"],
-answer:"El sistema solar está formado por el Sol y los cuerpos que orbitan a su alrededor: ocho planetas, planetas enanos, satélites, asteroides y cometas."
-},
-{
-keys:["planetas"],
-answer:"Los ocho planetas del sistema solar son Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno."
-},
-{
-keys:["agua"],
-answer:"El agua es una sustancia formada por dos átomos de hidrógeno y uno de oxígeno. Su fórmula química es H2O."
-},
-{
-keys:["oxigeno"],
-answer:"El oxígeno es un elemento químico esencial para la respiración de muchos seres vivos. Su símbolo es O y su número atómico es 8."
-},
-{
-keys:["fuerza"],
-answer:"En física, una fuerza es una interacción capaz de modificar el movimiento de un cuerpo o deformarlo. Se mide en newtons."
-},
-{
-keys:["energia"],
-answer:"La energía es la capacidad de producir cambios o realizar trabajo. Puede presentarse como energía térmica, eléctrica, química, cinética y potencial."
-},
-{
-keys:["albert einstein"],
-answer:"Albert Einstein fue un físico conocido por desarrollar la teoría de la relatividad y realizar importantes aportes a la física moderna."
-},
-{
-keys:["segunda guerra mundial"],
-answer:"La Segunda Guerra Mundial ocurrió entre 1939 y 1945. Fue un conflicto global en el que participaron numerosas potencias."
-},
-{
-keys:["revolucion francesa"],
-answer:"La Revolución francesa comenzó en 1789 y transformó profundamente la organización política y social de Francia."
-},
-{
-keys:["independencia argentina"],
-answer:"La independencia de Argentina fue declarada el 9 de julio de 1816 en el Congreso de Tucumán."
-},
-{
-keys:["cristobal colon"],
-answer:"Cristóbal Colón llegó a América en 1492 durante una expedición financiada por los Reyes Católicos de España."
-},
-{
-keys:["continentes"],
-answer:"Los continentes suelen clasificarse en América, Europa, Asia, África, Oceanía y Antártida."
-},
-{
-keys:["oceano mas grande"],
-answer:"El océano Pacífico es el más grande del planeta."
-},
-{
-keys:["animal mas grande"],
-answer:"La ballena azul es el animal más grande conocido que ha vivido en la Tierra."
-},
-{
-keys:["idioma mas hablado"],
-answer:"El chino mandarín tiene la mayor cantidad de hablantes nativos. El inglés destaca por su gran cantidad de hablantes totales."
-},
-{
-keys:["democracia"],
-answer:"La democracia es una forma de gobierno en la que el poder político pertenece al pueblo, que participa directamente o mediante representantes."
-},
-{
-keys:["futbol"],
-answer:"El fútbol es un deporte de equipo en el que dos equipos de once jugadores intentan marcar goles en el arco contrario."
-},
-{
-keys:["inteligencia artificial"],
-answer:"La inteligencia artificial es un campo de la informática que desarrolla sistemas capaces de realizar tareas como reconocer patrones, procesar lenguaje y resolver problemas."
-},
-{
-keys:["internet"],
-answer:"Internet es una red mundial de dispositivos conectados que permite intercambiar información y utilizar distintos servicios."
-},
-{
-keys:["big bang"],
-answer:"La teoría del Big Bang describe la evolución del universo desde un estado extremadamente caliente y denso hace aproximadamente 13.800 millones de años."
-},
-{
-keys:["virus"],
-answer:"Un virus es un agente infeccioso que necesita utilizar células de un organismo para reproducirse."
-},
-{
-keys:["bacteria"],
-answer:"Las bacterias son microorganismos unicelulares. Algunas pueden causar enfermedades, pero muchas son beneficiosas."
-},
-{
-keys:["ecosistema"],
-answer:"Un ecosistema es el conjunto de seres vivos y elementos no vivos que interactúan en un ambiente."
-},
-{
-keys:["revolucion industrial"],
-answer:"La Revolución Industrial comenzó en Gran Bretaña durante el siglo XVIII y transformó la producción mediante máquinas y fábricas."
-},
-{
-keys:["constitucion"],
-answer:"Una Constitución es la norma fundamental de un Estado. Establece la organización del gobierno, los derechos y las obligaciones."
-},
-{
-keys:["demografia"],
-answer:"La demografía es la ciencia que estudia las poblaciones humanas, su tamaño, distribución y cambios."
-},
-{
-keys:["fotosintesis"],
-answer:"En la fotosíntesis, las plantas transforman energía luminosa en energía química."
-},
-{
-keys:["corazon"],
-answer:"El corazón es un órgano muscular que bombea sangre por todo el cuerpo mediante el sistema circulatorio."
-},
-{
-keys:["cerebro"],
-answer:"El cerebro es el órgano principal del sistema nervioso. Procesa información y participa en el pensamiento, la memoria y el movimiento."
-},
-{
-keys:["adn"],
-answer:"El ADN es la molécula que almacena la información genética de los seres vivos."
-},
-{
-keys:["mitocondria"],
-answer:"La mitocondria es un orgánulo celular que participa en la producción de energía utilizable para la célula."
-},
-{
-keys:["sangre"],
-answer:"La sangre transporta oxígeno, nutrientes y otras sustancias. Está formada por plasma, glóbulos rojos, glóbulos blancos y plaquetas."
-},
-{
-keys:["evaporacion"],
-answer:"La evaporación es el cambio de estado de líquido a gas que ocurre desde la superficie de un líquido."
-},
-{
-keys:["condensacion"],
-answer:"La condensación es el cambio de estado de gas a líquido, como sucede cuando se forman gotas de agua."
-},
-{
-keys:["fotosfera"],
-answer:"La fotosfera es la capa visible del Sol desde la que recibimos gran parte de su luz."
-},
-{
-keys:["luna"],
-answer:"La Luna es el satélite natural de la Tierra. Refleja la luz del Sol y presenta distintas fases durante su órbita."
-},
-{
-keys:["marte"],
-answer:"Marte es el cuarto planeta del sistema solar. Se lo conoce como el planeta rojo por el óxido de hierro de su superficie."
-},
-{
-keys:["jupiter"],
-answer:"Júpiter es el planeta más grande del sistema solar y es un gigante gaseoso."
-},
-{
-keys:["saturno"],
-answer:"Saturno es un gigante gaseoso conocido por su destacado sistema de anillos."
-},
-{
-keys:["sol"],
-answer:"El Sol es una estrella situada en el centro del sistema solar. Su energía proviene de la fusión nuclear."
-},
-{
-keys:["galaxia"],
-answer:"Una galaxia es un conjunto enorme de estrellas, gas, polvo y materia oscura unidos por la gravedad."
-},
-{
-keys:["via lactea"],
-answer:"La Vía Láctea es la galaxia en la que se encuentra nuestro sistema solar."
-},
-{
-keys:["agujero negro"],
-answer:"Un agujero negro es una región del espacio cuya gravedad es tan intensa que ni siquiera la luz puede escapar desde su horizonte de sucesos."
-},
-{
-keys:["velocidad de la luz"],
-answer:"En el vacío, la luz viaja a aproximadamente 299.792 kilómetros por segundo."
-},
-{
-keys:["newton"],
-answer:"Isaac Newton fue un físico y matemático que formuló las leyes del movimiento y la ley de gravitación universal."
-},
-{
-keys:["tabla periodica"],
-answer:"La tabla periódica organiza los elementos químicos según su número atómico y sus propiedades. Actualmente contiene 118 elementos."
-},
-{
-keys:["piramides de egipto"],
-answer:"Las pirámides de Egipto son construcciones monumentales del Antiguo Egipto, utilizadas principalmente como tumbas reales."
-},
-{
-keys:["edad media"],
-answer:"La Edad Media es el período histórico europeo comprendido convencionalmente entre la caída del Imperio romano de Occidente en 476 y el siglo XV."
-},
-{
-keys:["edad moderna"],
-answer:"La Edad Moderna es un período histórico que suele ubicarse entre los siglos XV y XVIII, antes de la Edad Contemporánea."
-},
-{
-keys:["revolucion de mayo"],
-answer:"La Revolución de Mayo ocurrió en 1810 en Buenos Aires y dio inicio al proceso de formación del primer gobierno patrio."
-},
-{
-keys:["san martin"],
-answer:"José de San Martín fue un militar y político fundamental en las independencias de Argentina, Chile y Perú."
-},
-{
-keys:["belgrano"],
-answer:"Manuel Belgrano fue un abogado, economista y militar argentino, creador de la bandera argentina."
-},
-{
-keys:["clima"],
-answer:"El clima es el conjunto de condiciones atmosféricas habituales de una región observadas durante períodos largos."
-},
-{
-keys:["tiempo meteorologico"],
-answer:"El tiempo meteorológico describe las condiciones de la atmósfera en un lugar y momento determinados."
-},
-{
-keys:["temperatura"],
-answer:"La temperatura indica qué tan caliente o frío está un cuerpo o el aire. Se puede medir con un termómetro."
-},
-{
-keys:["humedad"],
-answer:"La humedad atmosférica es la cantidad de vapor de agua presente en el aire."
-},
-{
-keys:["precipitaciones"],
-answer:"Las precipitaciones son el agua que cae desde la atmósfera en forma de lluvia, nieve o granizo."
-},
-{
-keys:["presion atmosferica"],
-answer:"La presión atmosférica es la fuerza que ejerce el aire de la atmósfera sobre la superficie terrestre."
-},
-{
-keys:["capital de argentina"],
-answer:"La capital de Argentina es Buenos Aires."
-},
-{
-keys:["capital de alemania"],
-answer:"La capital de Alemania es Berlín."
-},
-{
-keys:["capital de francia"],
-answer:"La capital de Francia es París."
-}
-
-];
-
-// ==========================================
-// 7. ENCONTRAR ELEMENTOS QUÍMICOS
-// ==========================================
-
-function findElement(q){
-
- const numberMatch=q.match(
-  /(?:elemento|numero atomico)\s*(?:numero)?\s*(\d+)/
- );
-
- if(numberMatch){
-  return elements.find(e=>e.number===Number(numberMatch[1]))||null;
- }
-
- return elements.find(e=>{
-  const name=normalize(e.name);
-  return q.includes(name) && name.length>2;
- })||null;
-}
-
-function elementAnswer(q){
-
- const element=findElement(q);
-
- if(!element)return null;
-
- const asksNumber=
-  q.includes("numero atomico") ||
-  q.includes("numero de protones") ||
-  q.includes("protones");
-
- const asksSymbol=q.includes("simbolo");
- const asksMass=
-  q.includes("masa atomica") ||
-  q.includes("masa del elemento");
-
- let answer=element.name+" ("+element.symbol+").";
-
- if(asksNumber){
-  return "El número atómico del "+element.name+
-   " es "+element.number+". Tiene "+
-   element.number+" protones.";
- }
-
- if(asksSymbol){
-  return "El símbolo químico del "+element.name+
-   " es "+element.symbol+".";
- }
-
- if(asksMass){
-  return "La masa atómica aproximada del "+
-   element.name+" es "+element.mass+" u.";
- }
-
- return answer+
-  "\nNúmero atómico: "+element.number+
-  "\nSímbolo: "+element.symbol+
-  "\nMasa atómica aproximada: "+element.mass+" u.";
-}
-
-// ==========================================
-// 8. MOTOR MATEMÁTICO
-// ==========================================
+// ==================================
+// 5. CALCULADORA
+// ==================================
 
 function calculate(expression){
+ let exp=expression
+  .replace(/x/gi,"*")
+  .replace(/÷/g,"/")
+  .replace(/,/g,".");
 
- const tokens=expression.match(
-  /\d+(?:\.\d+)?|[()+\-*/%^]/g
- );
-
- if(!tokens||tokens.join("")!==expression.replace(/\s/g,"")){
+ if(!/^[0-9+\-*/().%\s^]+$/.test(exp)){
   return null;
  }
 
- let pos=0;
-
- function factor(){
-  const token=tokens[pos];
-
-  if(token==="+"){pos++;return factor()}
-  if(token==="-"){pos++;return -factor()}
-
-  if(token==="("){
-   pos++;
-   const value=sum();
-   if(tokens[pos]!==")")throw Error("Paréntesis");
-   pos++;
-   return value;
-  }
-
-  if(/^\d/.test(token||"")){
-   pos++;
-   return Number(token);
-  }
-
-  throw Error("Número");
- }
-
- function power(){
-  let value=factor();
-  if(tokens[pos]==="^"){
-   pos++;
-   value=Math.pow(value,power());
-  }
-  return value;
- }
-
- function product(){
-  let value=power();
-
-  while(["*","/","%"].includes(tokens[pos])){
-   const op=tokens[pos++];
-   const next=power();
-
-   if(op==="*")value*=next;
-   if(op==="/")value/=next;
-   if(op==="%")value%=next;
-  }
-
-  return value;
- }
-
- function sum(){
-  let value=product();
-
-  while(tokens[pos]==="+"||tokens[pos]==="-"){
-   const op=tokens[pos++];
-   const next=product();
-   value=op==="+"?value+next:value-next;
-  }
-
-  return value;
- }
+ exp=exp.replace(/\^/g,"**");
 
  try{
-  const result=sum();
-  if(pos!==tokens.length||!Number.isFinite(result))return null;
-  return Number(result.toFixed(8));
- }catch{
+  const result=Function('"use strict";return ('+exp+')')();
+  if(typeof result!=="number" || !Number.isFinite(result)){
+   return "No se puede resolver esa operación.";
+  }
+  return Number.isInteger(result)?result:Number(result.toFixed(8));
+ }catch(error){
   return null;
+ }
 }
 
-// ==========================================
-// 9. MEMORIA PERSONAL
-// ==========================================
+// ==================================
+// 6. MEMORIA PERSONAL
+// ==================================
 
-function loadCustom(){
+function getMemory(){
  try{
-  return JSON.parse(
-   localStorage.getItem("susanKnowledge")||"[]"
-  );
- }catch{
-  return [];
+  return JSON.parse(localStorage.getItem("susanKnowledge")||"{}");
+ }catch(error){
+  return {};
  }
 }
 
-function teachSusan(){
-
- const question=document.getElementById("newQuestion").value.trim();
- const answer=document.getElementById("newAnswer").value.trim();
-
- if(!question||!answer){
-  alert("Completá la pregunta y la respuesta.");
-  return;
- }
-
- const custom=loadCustom();
-
- const existing=custom.find(
-  item=>normalize(item.question)===normalize(question)
- );
-
- if(existing){
-  existing.answer=answer;
- }else{
-  custom.push({question,answer});
- }
-
- localStorage.setItem("susanKnowledge",JSON.stringify(custom));
-
- document.getElementById("newQuestion").value="";
- document.getElementById("newAnswer").value="";
-
- addMessage("Nuevo conocimiento guardado correctamente.","susan");
+function saveMemory(data){
+ localStorage.setItem("susanKnowledge",JSON.stringify(data));
 }
 
-function toggleTeach(){
- const box=document.getElementById("teachBox");
- box.style.display=box.style.display==="block"?"none":"block";
-}
+// ==================================
+// 7. RESPONDER PREGUNTAS
+// ==================================
 
-// ==========================================
-// 10. RESPUESTAS Y CONVERSACIÓN
-// ==========================================
+function answer(input){
+ const q=normalize(input);
+ const memory=getMemory();
 
-function answerQuestion(question){
-
- const q=normalize(question);
-
- if(!q)return "No recibí ninguna pregunta.";
-
- // Saludos
- if(/^(hola|buenas|buen dia|buenas tardes|buenas noches|hey)$/.test(q)){
-  return "¡Hola! Soy Susan. Mis sistemas están activos. ¿Qué necesitás?";
+ // Respuestas enseñadas
+ for(const key in memory){
+  if(q===key){
+   return memory[key];
+  }
  }
 
- if(q.includes("como estas")||q.includes("como andas")){
-  return "Funcionando correctamente. Gracias por preguntar.";
+ // Conocimientos programados
+ if(knowledge[q]){
+  return knowledge[q];
  }
 
- if(q.includes("tu nombre")||q.includes("quien sos")){
-  return "Soy Susan, tu asistente virtual personal.";
+ // Tabla periódica
+ const elementMatch=q.match(/(?:elemento|simbolo|numero atomico|atomo)\s+(?:del|de la|de)?\s*(.+)/);
+ if(elementMatch){
+  const el=findElement(elementMatch[1]);
+  if(el){
+   return el.name+" ("+el.symbol+") tiene número atómico "+el.number+".";
+  }
  }
 
- if(q.includes("que podes hacer")||q.includes("que sabes hacer")){
-  return "Puedo ayudarte con ciencias, historia, geografía, química, biología, astronomía, tecnología, cultura general y matemáticas. También puedo aprender respuestas que me enseñes.";
- }
-
- if(q.includes("quien te creo")||q.includes("quien te creo")){
-  return "Fui creada como un proyecto personal mediante programación. Mi base de conocimientos puede ampliarse.";
- }
-
- if(q.includes("hora")){
-  return "La hora actual es "+new Date().toLocaleTimeString("es-AR")+".";
- }
-
- if(q.includes("fecha")||q.includes("que dia es")){
-  return "La fecha actual es "+new Date().toLocaleDateString("es-AR")+".";
- }
-
- if(q.includes("gracias")){
-  return "¡De nada! Estoy aquí para ayudarte.";
- }
-
- if(q.includes("adios")||q.includes("chau")){
-  return "Hasta luego. Susan queda a la espera.";
+ // Buscar elemento por nombre o símbolo
+ const directElement=findElement(q);
+ if(directElement){
+  return directElement.name+" ("+directElement.symbol+") tiene número atómico "+directElement.number+".";
  }
 
  // Capitales
- if(q.includes("capital de")){
-  const country=q.split("capital de").pop().trim();
-
-  if(capitals[country]){
-   return "La capital de "+country+" es "+capitals[country]+".";
-  }
-
-  return "Todavía no tengo registrada la capital de ese país.";
+ if(q.startsWith("capital de ")){
+  const key=q;
+  if(knowledge[key])return knowledge[key];
  }
 
- // Elementos químicos
- const chemical=elementAnswer(q);
- if(chemical)return chemical;
-
- // Raíces cuadradas
- const root=q.match(/raiz cuadrada de\s*(-?\d+(?:\.\d+)?)/);
-
- if(root){
-  const n=Number(root[1]);
-  if(n<0)return "No puedo calcular raíces cuadradas reales de números negativos.";
-  return "La raíz cuadrada de "+n+" es "+Math.sqrt(n)+".";
+ // Matemáticas
+ const mathMatch=q.match(/(?:cuanto es|calcula|resuelve)\s+(.+)/);
+ if(mathMatch){
+  const result=calculate(mathMatch[1]);
+  if(result!==null)return "El resultado es "+result+".";
  }
 
- // Porcentajes
- const percent=q.match(
-  /(\d+(?:\.\d+)?)\s*(?:por ciento de|% de)\s*(\d+(?:\.\d+)?)/
- );
-
- if(percent){
-  const result=Number(percent[1])*Number(percent[2])/100;
-  return percent[1]+"% de "+percent[2]+" es "+result+".";
+ if(/^[0-9+\-*/().%\s^x÷,]+$/i.test(q) && /\d/.test(q)){
+  const result=calculate(q);
+  if(result!==null)return "El resultado es "+result+".";
  }
 
- // Conocimientos generales
- for(const item of knowledge){
-  if(item.keys.some(key=>q.includes(normalize(key)))){
-   return item.answer;
-  }
+ // Respuestas generales
+ if(q.includes("que es") || q.includes("quien fue") || q.includes("que significa")){
+  return "Todavía no tengo esa información en mi base de conocimientos. Podés enseñármela con el botón ENSEÑAR.";
  }
 
- // Memoria personalizada
- const custom=loadCustom();
-
- const saved=custom.find(
-  item=>normalize(item.question)===q
- );
-
- if(saved)return saved.answer;
-
- // Operaciones matemáticas
- let expression=q
-  .replace(/cuanto es|cuanto da|calcula|resuelve/g,"")
-  .replace(/multiplicado por|por/g,"*")
-  .replace(/dividido entre|dividido por/g,"/")
-  .replace(/mas/g,"+")
-  .replace(/menos/g,"-")
-  .replace(/x/g,"*")
-  .replace(/×/g,"*")
-  .replace(/÷/g,"/")
-  .replace(/,/g,".")
-  .trim();
-
- if(/^[0-9+\-*/().%^ ]+$/.test(expression)){
-  const result=calculate(expression);
-  if(result!==null)return "El resultado es: "+result+".";
- }
-
- return "Todavía no tengo información suficiente para responder eso. Podés enseñarme la respuesta con el botón ENSEÑAR. Mi base de conocimientos seguirá creciendo.";
+ return "Todavía no conozco la respuesta a esa pregunta. Podés enseñármela con el botón ENSEÑAR y la guardaré para futuras consultas.";
 }
 
-// ==========================================
-// 11. CHAT
-// ==========================================
+// ==================================
+// 8. CHAT
+// ==================================
 
-document.getElementById("form").addEventListener("submit",function(event){
+function addMessage(text,type){
+ const div=document.createElement("div");
+ div.className="message "+type;
+ div.textContent=text;
+ chat.appendChild(div);
+ chat.scrollTop=chat.scrollHeight;
+}
 
- event.preventDefault();
+function sendMessage(){
+ const text=question.value.trim();
+ if(!text)return;
 
- const question=input.value.trim();
- if(!question)return;
+ addMessage(text,"user");
+ question.value="";
 
- addMessage(question,"user");
+ const response=answer(text);
+ lastAnswer=response;
 
- const answer=answerQuestion(question);
- lastAnswer=answer;
+ setTimeout(function(){
+  addMessage(response,"bot");
+ },250);
+}
 
- addMessage(answer,"susan");
-
- input.value="";
- input.focus();
+question.addEventListener("keydown",function(event){
+ if(event.key==="Enter")sendMessage();
 });
 
-// ==========================================
-// 12. VOZ
-// ==========================================
+// ==================================
+// 9. ENSEÑAR A SUSAN
+// ==================================
+
+function teach(){
+ const newQuestion=prompt("¿Qué pregunta querés enseñarme?");
+ if(!newQuestion || !newQuestion.trim())return;
+
+ const newAnswer=prompt("¿Cuál es la respuesta correcta?");
+ if(!newAnswer || !newAnswer.trim())return;
+
+ const memory=getMemory();
+ memory[normalize(newQuestion)]=newAnswer.trim();
+ saveMemory(memory);
+
+ addMessage("He aprendido una nueva respuesta: "+newQuestion,"user");
+ addMessage("Información guardada correctamente. La recordaré en este navegador.","bot");
+}
+
+// ==================================
+// 10. VOZ
+// ==================================
 
 function speakLast(){
-
- if(!lastAnswer||!("speechSynthesis" in window))return;
+ if(!lastAnswer){
+  lastAnswer="No hay ninguna respuesta para leer.";
+ }
+ if(!("speechSynthesis" in window)){
+  addMessage("La lectura por voz no está disponible en este navegador.","bot");
+  return;
+ }
 
  speechSynthesis.cancel();
-
  const speech=new SpeechSynthesisUtterance(lastAnswer);
  speech.lang="es-AR";
  speech.rate=1;
-
  speechSynthesis.speak(speech);
 }
 
-// ==========================================
-// 13. LIMPIAR CHAT
-// ==========================================
+// ==================================
+// 11. LIMPIAR CHAT
+// ==================================
 
 function clearChat(){
-
  chat.innerHTML="";
+ addMessage("Conversación reiniciada. ¿En qué puedo ayudarte?","bot");
  lastAnswer="";
-
- addMessage(
-  "Conversación reiniciada. Mis conocimientos siguen disponibles.",
-  "susan"
- );
 }
-
 </script>
-
 </body>
 </html>
