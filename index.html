@@ -341,16 +341,15 @@ const elements = [
 // =====================================
 // 4. NORMALIZAR TEXTO
 // =====================================
-
 function normalize(text){
  return String(text)
- .toLowerCase()
- .normalize("NFD")
- .replace(/[\u0300-\u036f]/g,"")
- .replace(/[¿?¡!,.;:]/g,"")
- .trim();
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g,"")
+  .replace(/[¿?¡!,.;:]/g,"")
+  .replace(/\s+/g," ")
+  .trim();
 }
-
 // =====================================
 // 5. BUSCAR ELEMENTOS
 // =====================================
