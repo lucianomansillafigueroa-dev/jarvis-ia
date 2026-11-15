@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050b14">
-<title>JARVIS AI 3.0</title>
+<title>JARVIS AI 4.0</title>
 
 <style>
 * { box-sizing:border-box; }
@@ -13,57 +13,71 @@
 body {
   margin:0;
   background:#050b14;
-  color:#eaf7ff;
+  color:#e8f7ff;
   font-family:Arial,sans-serif;
-  min-height:100vh;
 }
 
 header {
   text-align:center;
   padding:25px 15px;
-  border-bottom:1px solid #123d59;
+  border-bottom:1px solid #16405c;
 }
 
 .logo {
-  font-size:32px;
+  font-size:34px;
   font-weight:bold;
-  color:#35d9ff;
-  letter-spacing:5px;
-  text-shadow:0 0 15px #00bfff;
+  letter-spacing:6px;
+  color:#36d9ff;
+  text-shadow:0 0 18px #00bfff;
 }
 
 .subtitle {
-  color:#80a9c4;
-  font-size:12px;
+  color:#789db5;
+  font-size:11px;
   letter-spacing:3px;
   margin-top:8px;
 }
 
 .status {
-  color:#36e9a1;
+  color:#39e6a5;
   font-size:12px;
   margin-top:15px;
 }
 
 main {
-  max-width:700px;
+  max-width:750px;
   margin:auto;
-  padding:20px;
+  padding:18px;
+}
+
+.panel {
+  background:#091725;
+  border:1px solid #17415c;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:15px;
+}
+
+.panel-title {
+  color:#37d9ff;
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:10px;
 }
 
 #chat {
-  height:55vh;
+  height:48vh;
   min-height:300px;
   overflow-y:auto;
-  border:1px solid #16405b;
-  border-radius:15px;
-  padding:15px;
-  background:#081522;
+  padding:12px;
+  background:#07121e;
+  border:1px solid #17415c;
+  border-radius:13px;
 }
 
 .message {
-  padding:12px 14px;
-  margin:12px 0;
+  padding:13px;
+  margin:10px 0;
   border-radius:12px;
   line-height:1.5;
   white-space:pre-wrap;
@@ -71,19 +85,19 @@ main {
 }
 
 .user {
-  background:#103b58;
+  background:#103b59;
   margin-left:25px;
 }
 
 .jarvis {
   background:#102638;
-  border-left:3px solid #24d5ff;
+  border-left:3px solid #28d9ff;
   margin-right:15px;
 }
 
 .label {
-  color:#40dcff;
-  font-size:11px;
+  color:#3cdbff;
+  font-size:10px;
   font-weight:bold;
   margin-bottom:6px;
 }
@@ -91,49 +105,69 @@ main {
 form {
   display:flex;
   gap:8px;
-  margin-top:15px;
+  margin-top:12px;
 }
 
 input {
-  flex:1;
   min-width:0;
-  background:#0b1d2c;
+  flex:1;
+  padding:14px;
+  background:#0c1d2c;
   border:1px solid #20516e;
   border-radius:10px;
-  padding:14px;
   color:white;
   font-size:15px;
   outline:none;
 }
 
+input:focus {
+  border-color:#31d9ff;
+}
+
 button {
-  background:#00bce9;
-  color:#00121d;
+  padding:12px 15px;
   border:0;
-  border-radius:10px;
-  padding:12px 17px;
+  border-radius:9px;
+  background:#13bce8;
+  color:#00131d;
   font-weight:bold;
   cursor:pointer;
 }
 
-.tools {
+.buttons {
   display:flex;
-  gap:8px;
   flex-wrap:wrap;
-  margin-top:15px;
+  gap:8px;
+  margin-top:12px;
 }
 
-.tools button {
+.buttons button {
   background:#102c40;
-  color:#62dfff;
+  color:#65ddff;
   border:1px solid #20516e;
+}
+
+.small {
+  color:#789bb0;
+  font-size:12px;
+  line-height:1.5;
 }
 
 footer {
   text-align:center;
-  color:#55758a;
-  font-size:11px;
+  color:#56758a;
   padding:25px;
+  font-size:11px;
+}
+
+#teachBox {
+  display:none;
+  margin-top:12px;
+}
+
+#teachBox input {
+  width:100%;
+  margin-bottom:8px;
 }
 </style>
 </head>
@@ -142,17 +176,27 @@ footer {
 
 <header>
   <div class="logo">JARVIS</div>
-  <div class="subtitle">ARTIFICIAL INTELLIGENCE</div>
-  <div class="status">● SISTEMA ACTIVO — VERSIÓN 3.0</div>
+  <div class="subtitle">PERSONAL ARTIFICIAL INTELLIGENCE</div>
+  <div class="status">● SISTEMA ACTIVO — VERSIÓN 4.0</div>
 </header>
 
 <main>
+
+  <div class="panel">
+    <div class="panel-title">SISTEMA</div>
+    <div class="small">
+      Núcleo de conocimientos activo.<br>
+      Motor matemático activo.<br>
+      Módulo de conversación activo.
+    </div>
+  </div>
+
   <div id="chat">
     <div class="message jarvis">
-      <div class="label">JARVIS</div>
-      Hola. Soy JARVIS AI 3.0.
-      Mi sistema de conocimientos está activo.
-      ¿En qué puedo ayudarte?
+      <div class="label">JARVIS AI 4.0</div>
+      Sistemas iniciados correctamente.
+      Estoy listo para responder tus preguntas.
+      ¿Qué necesitas?
     </div>
   </div>
 
@@ -161,22 +205,254 @@ footer {
     <button type="submit">ENVIAR</button>
   </form>
 
-  <div class="tools">
-    <button type="button" onclick="speakLast()">🔊 Voz</button>
-    <button type="button" onclick="clearChat()">Limpiar chat</button>
+  <div class="buttons">
+    <button type="button" onclick="speakLast()">🔊 ESCUCHAR</button>
+    <button type="button" onclick="clearChat()">LIMPIAR CHAT</button>
+    <button type="button" onclick="toggleTeach()">+ ENSEÑAR</button>
   </div>
+
+  <div id="teachBox" class="panel">
+    <div class="panel-title">ENSEÑAR A JARVIS</div>
+    <input id="newQuestion" placeholder="Escribí una pregunta">
+    <input id="newAnswer" placeholder="Escribí la respuesta">
+    <button type="button" onclick="teachJarvis()">GUARDAR CONOCIMIENTO</button>
+    <p class="small">Las respuestas que agregues se guardarán en este navegador.</p>
+  </div>
+
 </main>
 
-<footer>JARVIS AI 3.0 — SISTEMA PERSONAL</footer>
+<footer>JARVIS AI 4.0 — SISTEMA PERSONAL</footer>
 
 <script>
+
+// ==================================
+// 1. CONFIGURACIÓN
+// ==================================
+
 const chat = document.getElementById("chat");
-const form = document.getElementById("form");
 const input = document.getElementById("question");
 
 let lastAnswer = "";
 
-function addMessage(text, type) {
+// ==================================
+// 2. BASE DE CONOCIMIENTOS
+// ==================================
+
+const capitals = {
+  "argentina":"Buenos Aires",
+  "alemania":"Berlín",
+  "francia":"París",
+  "españa":"Madrid",
+  "italia":"Roma",
+  "portugal":"Lisboa",
+  "brasil":"Brasilia",
+  "uruguay":"Montevideo",
+  "chile":"Santiago",
+  "paraguay":"Asunción",
+  "bolivia":"Sucre",
+  "peru":"Lima",
+  "colombia":"Bogotá",
+  "venezuela":"Caracas",
+  "ecuador":"Quito",
+  "mexico":"Ciudad de México",
+  "estados unidos":"Washington D. C.",
+  "canada":"Ottawa",
+  "japon":"Tokio",
+  "china":"Pekín",
+  "india":"Nueva Delhi",
+  "rusia":"Moscú",
+  "reino unido":"Londres",
+  "australia":"Canberra",
+  "egipto":"El Cairo",
+  "grecia":"Atenas",
+  "turquia":"Ankara",
+  "corea del sur":"Seúl",
+  "paises bajos":"Ámsterdam",
+  "belgica":"Bruselas",
+  "suiza":"Berna",
+  "noruega":"Oslo",
+  "suecia":"Estocolmo",
+  "finlandia":"Helsinki",
+  "dinamarca":"Copenhague",
+  "irlanda":"Dublín",
+  "austria":"Viena",
+  "polonia":"Varsovia",
+  "islandia":"Reikiavik",
+  "sudafrica":"Pretoria",
+  "marruecos":"Rabat",
+  "nigeria":"Abuya",
+  "kenia":"Nairobi",
+  "arabia saudita":"Riad",
+  "nueva zelanda":"Wellington"
+};
+
+const knowledge = [
+
+  {
+    keys:["fotosintesis"],
+    answer:"La fotosíntesis es el proceso mediante el cual las plantas utilizan la luz solar, el agua y el dióxido de carbono para producir alimento y liberar oxígeno."
+  },
+
+  {
+    keys:["atomo"],
+    answer:"El átomo es la unidad básica de la materia. Está formado por protones y neutrones en el núcleo, y electrones alrededor."
+  },
+
+  {
+    keys:["celula"],
+    answer:"La célula es la unidad estructural y funcional básica de los seres vivos."
+  },
+
+  {
+    keys:["gravedad"],
+    answer:"La gravedad es la interacción que produce atracción entre cuerpos con masa. Gracias a ella permanecemos sobre la Tierra."
+  },
+
+  {
+    keys:["sistema solar"],
+    answer:"El sistema solar está formado por el Sol y los cuerpos que orbitan a su alrededor: ocho planetas, planetas enanos, satélites, asteroides y cometas."
+  },
+
+  {
+    keys:["planetas"],
+    answer:"Los ocho planetas del sistema solar son Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno."
+  },
+
+  {
+    keys:["agua"],
+    answer:"El agua es una sustancia formada por dos átomos de hidrógeno y uno de oxígeno. Su fórmula química es H2O."
+  },
+
+  {
+    keys:["oxigeno"],
+    answer:"El oxígeno es un elemento químico esencial para la respiración de muchos seres vivos. Su símbolo es O."
+  },
+
+  {
+    keys:["fuerza"],
+    answer:"En física, una fuerza es una interacción capaz de modificar el movimiento de un cuerpo o deformarlo. Se mide en newtons."
+  },
+
+  {
+    keys:["energia"],
+    answer:"La energía es la capacidad de producir cambios o realizar trabajo. Puede presentarse como energía térmica, eléctrica, química, cinética y potencial."
+  },
+
+  {
+    keys:["albert einstein"],
+    answer:"Albert Einstein fue un físico conocido por desarrollar la teoría de la relatividad."
+  },
+
+  {
+    keys:["segunda guerra mundial"],
+    answer:"La Segunda Guerra Mundial ocurrió entre 1939 y 1945. Fue un conflicto global en el que participaron numerosas potencias."
+  },
+
+  {
+    keys:["revolucion francesa"],
+    answer:"La Revolución francesa comenzó en 1789 y transformó profundamente la organización política y social de Francia."
+  },
+
+  {
+    keys:["independencia argentina"],
+    answer:"La independencia de Argentina fue declarada el 9 de julio de 1816 en el Congreso de Tucumán."
+  },
+
+  {
+    keys:["cristobal colon"],
+    answer:"Cristóbal Colón llegó a América en 1492 durante una expedición financiada por los Reyes Católicos de España."
+  },
+
+  {
+    keys:["continentes"],
+    answer:"Los continentes suelen clasificarse en América, Europa, Asia, África, Oceanía y Antártida."
+  },
+
+  {
+    keys:["oceano mas grande"],
+    answer:"El océano Pacífico es el más grande del planeta."
+  },
+
+  {
+    keys:["animal mas grande"],
+    answer:"La ballena azul es el animal más grande conocido que ha vivido en la Tierra."
+  },
+
+  {
+    keys:["idioma mas hablado"],
+    answer:"El chino mandarín es el idioma con más hablantes nativos. El inglés destaca por su gran cantidad de hablantes totales."
+  },
+
+  {
+    keys:["democracia"],
+    answer:"La democracia es una forma de gobierno en la que el poder político pertenece al pueblo, que participa directamente o mediante representantes."
+  },
+
+  {
+    keys:["futbol"],
+    answer:"El fútbol es un deporte de equipo en el que dos equipos de once jugadores intentan marcar goles en el arco contrario."
+  },
+
+  {
+    keys:["inteligencia artificial"],
+    answer:"La inteligencia artificial es un campo de la informática que desarrolla sistemas capaces de realizar tareas que normalmente requieren capacidades humanas, como reconocer patrones o procesar lenguaje."
+  },
+
+  {
+    keys:["internet"],
+    answer:"Internet es una red mundial de dispositivos conectados que permite intercambiar información y utilizar distintos servicios."
+  },
+
+  {
+    keys:["big bang"],
+    answer:"La teoría del Big Bang describe la evolución del universo desde un estado extremadamente caliente y denso hace aproximadamente 13.800 millones de años."
+  },
+
+  {
+    keys:["virus"],
+    answer:"Un virus es un agente infeccioso que necesita utilizar células de un organismo para reproducirse."
+  },
+
+  {
+    keys:["bacteria"],
+    answer:"Las bacterias son microorganismos unicelulares. Algunas pueden causar enfermedades, pero muchas son beneficiosas."
+  },
+
+  {
+    keys:["ecosistema"],
+    answer:"Un ecosistema es el conjunto de seres vivos y elementos no vivos que interactúan en un ambiente."
+  },
+
+  {
+    keys:["revolucion industrial"],
+    answer:"La Revolución Industrial comenzó en Gran Bretaña durante el siglo XVIII y transformó la producción mediante máquinas y fábricas."
+  },
+
+  {
+    keys:["constitucion"],
+    answer:"Una Constitución es la norma fundamental de un Estado. Establece la organización del gobierno, los derechos y las obligaciones."
+  },
+
+  {
+    keys:["demografia"],
+    answer:"La demografía es la ciencia que estudia las poblaciones humanas, su tamaño, distribución y cambios."
+  }
+
+];
+
+// ==================================
+// 3. FUNCIONES GENERALES
+// ==================================
+
+function normalize(text) {
+  return text.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[¿?¡!.,;:]/g,"")
+    .trim();
+}
+
+function addMessage(text,type) {
   const box = document.createElement("div");
   box.className = "message " + type;
 
@@ -190,32 +466,100 @@ function addMessage(text, type) {
   box.appendChild(label);
   box.appendChild(content);
   chat.appendChild(box);
+
   chat.scrollTop = chat.scrollHeight;
 }
 
-function calculate(expression) {
-  let clean = expression
-    .replace(/,/g, ".")
-    .replace(/por/g, "*")
-    .replace(/más/g, "+")
-    .replace(/mas/g, "+")
-    .replace(/menos/g, "-")
-    .replace(/dividido entre/g, "/")
-    .replace(/dividido por/g, "/")
-    .replace(/multiplicado por/g, "*")
-    .replace(/x/g, "*")
-    .replace(/×/g, "*")
-    .replace(/÷/g, "/")
-    .replace(/[^0-9+\-*/().% ]/g, "");
+// ==================================
+// 4. MOTOR MATEMÁTICO
+// ==================================
 
-  if (!clean.trim()) return null;
+function calculate(expression) {
+  const tokens = expression.match(
+    /\d+(?:\.\d+)?|[()+\-*/%^]/g
+  );
+
+  if (!tokens || tokens.join("") !== expression.replace(/\s/g,"")) {
+    return null;
+  }
+
+  let pos = 0;
+
+  function factor() {
+    const token = tokens[pos];
+
+    if (token === "+") {
+      pos++;
+      return factor();
+    }
+
+    if (token === "-") {
+      pos++;
+      return -factor();
+    }
+
+    if (token === "(") {
+      pos++;
+      const value = sum();
+
+      if (tokens[pos] !== ")") throw Error("Paréntesis");
+      pos++;
+
+      return value;
+    }
+
+    if (/^\d/.test(token || "")) {
+      pos++;
+      return Number(token);
+    }
+
+    throw Error("Número");
+  }
+
+  function power() {
+    let value = factor();
+
+    if (tokens[pos] === "^") {
+      pos++;
+      value = Math.pow(value,power());
+    }
+
+    return value;
+  }
+
+  function product() {
+    let value = power();
+
+    while (["*","/","%"].includes(tokens[pos])) {
+      const op = tokens[pos++];
+      const next = power();
+
+      if (op === "*") value *= next;
+      if (op === "/") value /= next;
+      if (op === "%") value %= next;
+    }
+
+    return value;
+  }
+
+  function sum() {
+    let value = product();
+
+    while (tokens[pos] === "+" || tokens[pos] === "-") {
+      const op = tokens[pos++];
+      const next = product();
+
+      if (op === "+") value += next;
+      else value -= next;
+    }
+
+    return value;
+  }
 
   try {
-    if (!/^[0-9+\-*/().% ]+$/.test(clean)) return null;
+    const result = sum();
 
-    const result = Function('"use strict"; return (' + clean + ')')();
-
-    if (typeof result !== "number" || !Number.isFinite(result)) {
+    if (pos !== tokens.length || !Number.isFinite(result)) {
       return null;
     }
 
@@ -225,60 +569,9 @@ function calculate(expression) {
   }
 }
 
-const knowledge = [
-  {
-    keys:["capital de argentina"],
-    answer:"La capital de Argentina es Buenos Aires."
-  },
-  {
-    keys:["capital de francia"],
-    answer:"La capital de Francia es París."
-  },
-  {
-    keys:["capital de brasil"],
-    answer:"La capital de Brasil es Brasilia."
-  },
-  {
-    keys:["capital de españa"],
-    answer:"La capital de España es Madrid."
-  },
-  {
-    keys:["que es la fotosintesis","qué es la fotosíntesis","fotosintesis"],
-    answer:"La fotosíntesis es el proceso por el cual las plantas utilizan la luz solar, el agua y el dióxido de carbono para producir su alimento y liberar oxígeno."
-  },
-  {
-    keys:["que es un atomo","qué es un átomo","atomo","átomo"],
-    answer:"Un átomo es la unidad básica de la materia. Está formado por protones, neutrones y electrones."
-  },
-  {
-    keys:["que es la gravedad","qué es la gravedad"],
-    answer:"La gravedad es una fuerza de atracción entre los cuerpos que tienen masa. Es la que nos mantiene sobre la superficie terrestre."
-  },
-  {
-    keys:["quien fue einstein","quién fue einstein"],
-    answer:"Albert Einstein fue un físico conocido por desarrollar la teoría de la relatividad."
-  },
-  {
-    keys:["quien descubrio america","quién descubrió américa"],
-    answer:"Cristóbal Colón llegó a América en 1492, durante una expedición financiada por los Reyes Católicos de España."
-  },
-  {
-    keys:["que es la celula","qué es la célula"],
-    answer:"La célula es la unidad estructural y funcional básica de los seres vivos."
-  },
-  {
-    keys:["que es el agua"],
-    answer:"El agua es una sustancia formada por dos átomos de hidrógeno y uno de oxígeno. Su fórmula química es H2O."
-  }
-];
-
-function normalize(text) {
-  return text.toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[¿?¡!.,]/g, "")
-    .trim();
-}
+// ==================================
+// 5. RESPUESTAS INTELIGENTES
+// ==================================
 
 function answerQuestion(question) {
   const q = normalize(question);
@@ -286,11 +579,11 @@ function answerQuestion(question) {
   if (!q) return "No recibí ninguna pregunta.";
 
   if (/^(hola|buenas|buen dia|buenas tardes|buenas noches)$/.test(q)) {
-    return "Hola. Todos mis sistemas están funcionando correctamente. ¿Qué necesitas?";
+    return "Hola. Mis sistemas están activos. ¿En qué puedo ayudarte?";
   }
 
   if (q.includes("como estas") || q.includes("como andas")) {
-    return "Funcionando al 100%. Gracias por preguntar. ¿En qué puedo ayudarte?";
+    return "Funcionando correctamente. Gracias por preguntar.";
   }
 
   if (q.includes("tu nombre") || q.includes("quien sos")) {
@@ -298,50 +591,81 @@ function answerQuestion(question) {
   }
 
   if (q.includes("que podes hacer") || q.includes("que sabes hacer")) {
-    return "Puedo realizar cálculos, responder preguntas de cultura general, explicar conceptos y conversar mediante mis conocimientos programados.";
+    return "Puedo responder preguntas de cultura general, explicar ciencias, historia y geografía, realizar cálculos y aprender nuevas respuestas que me enseñes.";
   }
 
   if (q.includes("hora")) {
-    return "La hora actual de tu dispositivo es " +
+    return "La hora actual es " +
       new Date().toLocaleTimeString("es-AR") + ".";
   }
 
   if (q.includes("fecha") || q.includes("que dia es")) {
-    return "Hoy es " + new Date().toLocaleDateString("es-AR") + ".";
+    return "La fecha actual es " +
+      new Date().toLocaleDateString("es-AR") + ".";
+  }
+
+  if (q.includes("capital de")) {
+    const country = q.split("capital de").pop().trim();
+
+    if (capitals[country]) {
+      return "La capital de " +
+        country.charAt(0).toUpperCase() +
+        country.slice(1) +
+        " es " + capitals[country] + ".";
+    }
   }
 
   if (q.includes("raiz cuadrada de")) {
-    const n = Number(q.split("raiz cuadrada de")[1]);
+    const n = Number(q.split("raiz cuadrada de").pop());
+
     if (Number.isFinite(n) && n >= 0) {
-      return "La raíz cuadrada de " + n + " es " + Math.sqrt(n) + ".";
+      return "La raíz cuadrada de " + n +
+        " es " + Math.sqrt(n) + ".";
     }
   }
 
-  if (q.includes("porcentaje")) {
-    const numbers = q.match(/\d+(\.\d+)?/g);
-    if (numbers && numbers.length >= 2) {
-      const result = Number(numbers[0]) * Number(numbers[1]) / 100;
-      return numbers[0] + "% de " + numbers[1] + " es " + result + ".";
-    }
+  const percent = q.match(
+    /(\d+(?:\.\d+)?)\s*(?:por ciento de|% de)\s*(\d+(?:\.\d+)?)/
+  );
+
+  if (percent) {
+    const result = Number(percent[1]) *
+      Number(percent[2]) / 100;
+
+    return percent[1] + "% de " +
+      percent[2] + " es " + result + ".";
   }
 
-  if (/^[0-9+\-*/().,% x÷]+$/.test(q)) {
-    const result = calculate(q);
+  let expression = q
+    .replace(/cuanto es|cuanto da|calcula|resuelve/g,"")
+    .replace(/multiplicado por|por/g,"*")
+    .replace(/dividido entre|dividido por/g,"/")
+    .replace(/mas/g,"+")
+    .replace(/menos/g,"-")
+    .replace(/x/g,"*")
+    .replace(/×/g,"*")
+    .replace(/÷/g,"/")
+    .replace(/,/g,".")
+    .trim();
+
+  if (/^[0-9+\-*/().%^ ]+$/.test(expression)) {
+    const result = calculate(expression);
+
     if (result !== null) {
-      return "El resultado es: " + result;
-    }
-  }
-
-  const calcMatch = q.match(/(?:cuanto es|cuanto da|calcula)\s+(.+)/);
-  if (calcMatch) {
-    const result = calculate(calcMatch[1]);
-    if (result !== null) {
-      return "El resultado es: " + result;
+      return "El resultado es: " + result + ".";
     }
   }
 
   for (const item of knowledge) {
     if (item.keys.some(key => q.includes(normalize(key)))) {
+      return item.answer;
+    }
+  }
+
+  const custom = loadCustom();
+
+  for (const item of custom) {
+    if (q === normalize(item.question)) {
       return item.answer;
     }
   }
@@ -354,27 +678,90 @@ function answerQuestion(question) {
     return "Hasta luego. JARVIS queda a la espera.";
   }
 
-  return "Todavía no tengo conocimientos suficientes para responder eso. Mi base de conocimientos puede ampliarse agregando nuevos temas y respuestas.";
+  return "Todavía no tengo información suficiente para responder esa pregunta. Podés enseñarme la respuesta usando el botón ENSEÑAR.";
 }
 
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
+// ==================================
+// 6. MEMORIA DE CONOCIMIENTOS
+// ==================================
 
-  const question = input.value.trim();
-  if (!question) return;
+function loadCustom() {
+  try {
+    return JSON.parse(
+      localStorage.getItem("jarvisKnowledge") || "[]"
+    );
+  } catch {
+    return [];
+  }
+}
 
-  addMessage(question, "user");
+function teachJarvis() {
+  const question = document.getElementById("newQuestion").value.trim();
+  const answer = document.getElementById("newAnswer").value.trim();
 
-  const answer = answerQuestion(question);
-  lastAnswer = answer;
+  if (!question || !answer) {
+    alert("Completá la pregunta y la respuesta.");
+    return;
+  }
 
-  addMessage(answer, "jarvis");
-  input.value = "";
-  input.focus();
-});
+  const custom = loadCustom();
+
+  const existing = custom.find(
+    item => normalize(item.question) === normalize(question)
+  );
+
+  if (existing) {
+    existing.answer = answer;
+  } else {
+    custom.push({question,answer});
+  }
+
+  localStorage.setItem("jarvisKnowledge",JSON.stringify(custom));
+
+  document.getElementById("newQuestion").value = "";
+  document.getElementById("newAnswer").value = "";
+
+  addMessage("Nuevo conocimiento guardado correctamente.", "jarvis");
+}
+
+function toggleTeach() {
+  const box = document.getElementById("teachBox");
+  box.style.display =
+    box.style.display === "block" ? "none" : "block";
+}
+
+// ==================================
+// 7. CHAT
+// ==================================
+
+document.getElementById("form").addEventListener(
+  "submit",
+  function(event) {
+    event.preventDefault();
+
+    const question = input.value.trim();
+    if (!question) return;
+
+    addMessage(question,"user");
+
+    const answer = answerQuestion(question);
+    lastAnswer = answer;
+
+    addMessage(answer,"jarvis");
+
+    input.value = "";
+    input.focus();
+  }
+);
+
+// ==================================
+// 8. VOZ
+// ==================================
 
 function speakLast() {
-  if (!lastAnswer || !("speechSynthesis" in window)) return;
+  if (!lastAnswer || !("speechSynthesis" in window)) {
+    return;
+  }
 
   speechSynthesis.cancel();
 
@@ -385,11 +772,20 @@ function speakLast() {
   speechSynthesis.speak(speech);
 }
 
+// ==================================
+// 9. LIMPIAR CHAT
+// ==================================
+
 function clearChat() {
   chat.innerHTML = "";
   lastAnswer = "";
-  addMessage("Conversación reiniciada. ¿En qué puedo ayudarte?", "jarvis");
+
+  addMessage(
+    "Conversación reiniciada. Todos mis conocimientos siguen disponibles.",
+    "jarvis"
+  );
 }
+
 </script>
 
 </body>
