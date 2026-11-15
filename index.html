@@ -748,6 +748,39 @@ document.getElementById("send")
 document.getElementById("teach")
  .addEventListener("click", teach);
 
+const screenButton = document.getElementById("screen");
+const screenFile = document.getElementById("screenFile");
+
+screenButton.addEventListener("click", function(){
+ screenFile.click();
+});
+
+screenFile.addEventListener("change", function(){
+
+ const file = screenFile.files[0];
+
+ if(!file) return;
+
+ if(!file.type.startsWith("image/")){
+  addMessage("Elegí una imagen válida.", "bot");
+  return;
+ }
+
+ const imageUrl = URL.createObjectURL(file);
+
+ addMessage("Captura seleccionada: " + file.name, "bot");
+
+ const preview = document.createElement("img");
+ preview.src = imageUrl;
+ preview.alt = "Captura seleccionada";
+ preview.style.maxWidth = "100%";
+ preview.style.borderRadius = "12px";
+ preview.style.marginTop = "10px";
+
+ document.getElementById("chat").appendChild(preview);
+
+});
+
 document.getElementById("voice")
  .addEventListener("click", startListening);
 
