@@ -1,111 +1,62 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050b14">
-<title>JARVIS AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#030914">
+<title>JARVIS 2.0</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;background:#030914;color:#c9f5ff;
+ font-family:Arial,sans-serif;text-align:center;
+ min-height:100vh;
 }
-
-body {
-  margin: 0;
-  background: #050b14;
-  color: #d9f5ff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  min-height: 100vh;
+header{
+ padding:25px 10px;color:#43dcff;
+ font-size:28px;letter-spacing:7px;
+ text-shadow:0 0 18px #00bfff;
 }
-
-header {
-  padding: 28px 10px;
-  letter-spacing: 5px;
-  color: #42dfff;
-  font-size: 25px;
-  text-shadow: 0 0 15px #00bfff;
+#status{color:#41eaff;font-size:12px;letter-spacing:3px}
+.reactor{
+ width:210px;height:210px;margin:45px auto 25px;
+ border:3px solid #13cfff;border-radius:50%;
+ display:grid;place-items:center;
+ box-shadow:0 0 25px #00bfff,inset 0 0 25px #00bfff;
+ animation:pulse 3s infinite;
 }
-
-.status {
-  color: #4ce6ff;
-  font-size: 12px;
-  letter-spacing: 3px;
-  margin-top: 15px;
+.core{
+ width:105px;height:105px;border-radius:50%;
+ background:radial-gradient(#fff,#00cfff,#06436d);
+ box-shadow:0 0 35px #00dfff;
 }
-
-.reactor {
-  width: 220px;
-  height: 220px;
-  margin: 65px auto 30px;
-  border: 3px solid #16cfff;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 20px #00bfff,
-              inset 0 0 25px #00bfff;
-  animation: pulse 3s infinite;
+@keyframes pulse{
+ 50%{box-shadow:0 0 45px #00cfff,inset 0 0 40px #00cfff}
 }
-
-.core {
-  width: 115px;
-  height: 115px;
-  border: 5px solid #8cf5ff;
-  border-radius: 50%;
-  background: radial-gradient(#00cfff,#07517d,#061322);
-  box-shadow: 0 0 35px #00cfff;
+#response{
+ margin:20px;padding:18px;
+ min-height:85px;background:#081b2b;
+ border:1px solid #147da5;border-radius:14px;
+ line-height:1.6;
 }
-
-@keyframes pulse {
-  50% {
-    box-shadow: 0 0 40px #00cfff,
-                inset 0 0 40px #00cfff;
-  }
+input{
+ width:85%;padding:15px;border-radius:10px;
+ background:#0b1d2c;color:white;
+ border:1px solid #168db7;font-size:16px;
 }
-
-button {
-  background: #06243a;
-  color: #55eaff;
-  border: 1px solid #20cfff;
-  padding: 15px 25px;
-  border-radius: 12px;
-  font-size: 15px;
-  margin: 8px;
-  box-shadow: 0 0 10px #008cff55;
+button{
+ background:#06243a;color:#55eaff;
+ border:1px solid #20cfff;padding:14px 19px;
+ border-radius:12px;font-size:14px;margin:7px;
 }
-
-button:active {
-  background: #087ba5;
-}
-
-#response {
-  margin: 25px 20px;
-  min-height: 65px;
-  padding: 18px;
-  border: 1px solid #12658b;
-  border-radius: 12px;
-  color: #b9edff;
-  line-height: 1.6;
-  background: #071522;
-}
-
-input {
-  width: 85%;
-  padding: 15px;
-  border-radius: 10px;
-  background: #0b1d2c;
-  color: white;
-  border: 1px solid #168db7;
-  font-size: 15px;
-}
-
-footer {
-  color: #477d98;
-  font-size: 11px;
-  margin: 45px 0 20px;
-  letter-spacing: 2px;
+button:active{background:#087ba5}
+.small{font-size:11px;color:#598ca3;margin:20px}
+#history{
+ margin:15px;padding:12px;text-align:left;
+ color:#91cddd;font-size:13px;
+ background:#061321;border-radius:10px;
 }
 </style>
 </head>
@@ -113,161 +64,200 @@ footer {
 <body>
 
 <header>J.A.R.V.I.S.</header>
-
-<div class="status" id="status">
-SYSTEM ONLINE
-</div>
+<div id="status">SISTEMA ACTIVO</div>
 
 <div class="reactor">
-  <div class="core"></div>
+ <div class="core"></div>
 </div>
 
 <h3>ASISTENTE PERSONAL</h3>
 
 <div id="response">
-  Buenas tardes. Soy JARVIS.
-  ¿En qué puedo ayudarte?
+ Buenas tardes. Soy JARVIS.
+ Estoy preparado para ayudarte.
 </div>
 
 <button onclick="listen()">🎙 HABLAR</button>
 
-<br>
+<br><br>
 
-<input id="message"
-placeholder="Escribí un comando...">
+<input id="message" placeholder="Escribí un comando...">
 
 <button onclick="send()">ENVIAR</button>
 
 <br>
 
-<button onclick="speak('Sistemas funcionando correctamente.')">
-PROBAR VOZ
+<button onclick="speak('Todos mis sistemas funcionan correctamente.')">
+ PROBAR VOZ
 </button>
 
-<footer>
-JARVIS AI · PERSONAL ASSISTANT · VERSION 1.0
-</footer>
+<button onclick="clearMemory()">BORRAR MEMORIA</button>
+
+<div id="history">
+ <b>MEMORIA DE ESTA SESIÓN</b>
+ <p id="memory">Todavía no hay recuerdos.</p>
+</div>
+
+<div class="small">
+ JARVIS AI · VERSIÓN 2.0 · SISTEMA PERSONAL
+</div>
 
 <script>
 
-const response = document.getElementById("response");
-const statusText = document.getElementById("status");
+const response=document.getElementById("response");
+const statusText=document.getElementById("status");
+const message=document.getElementById("message");
+const memory=document.getElementById("memory");
 
-function speak(text) {
-  speechSynthesis.cancel();
+let memories=[];
 
-  const voice = new SpeechSynthesisUtterance(text);
-  voice.lang = "es-AR";
-  voice.rate = 1;
-  voice.pitch = 0.9;
+function speak(text){
+ if(!("speechSynthesis" in window))return;
 
-  speechSynthesis.speak(voice);
+ speechSynthesis.cancel();
+
+ const voice=new SpeechSynthesisUtterance(text);
+ voice.lang="es-AR";
+ voice.rate=0.95;
+ voice.pitch=0.85;
+
+ speechSynthesis.speak(voice);
 }
 
-function answer(text) {
-  response.innerText = text;
-  speak(text);
+function answer(text){
+ response.innerText=text;
+ speak(text);
 }
 
-function listen() {
-
-  const Recognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if (!Recognition) {
-    answer("Tu navegador no admite reconocimiento de voz.");
-    return;
-  }
-
-  const recognition = new Recognition();
-
-  recognition.lang = "es-AR";
-  recognition.continuous = false;
-  recognition.interimResults = false;
-
-  statusText.innerText = "ESCUCHANDO...";
-
-  recognition.onresult = function(event) {
-    const text = event.results[0][0].transcript;
-    document.getElementById("message").value = text;
-    command(text);
-  };
-
-  recognition.onerror = function() {
-    statusText.innerText = "SYSTEM ONLINE";
-    answer("No pude reconocer tu voz. Intentá nuevamente.");
-  };
-
-  recognition.onend = function() {
-    statusText.innerText = "SYSTEM ONLINE";
-  };
-
-  recognition.start();
+function remember(text){
+ memories.push(text);
+ memory.innerText=memories.join(" | ");
 }
 
-function send() {
-  const text = document.getElementById("message").value.trim();
-
-  if (text) command(text);
+function clearMemory(){
+ memories=[];
+ memory.innerText="Todavía no hay recuerdos.";
+ answer("He borrado la memoria de esta sesión.");
 }
 
-function command(text) {
+function listen(){
 
-  const t = text.toLowerCase();
+ const Recognition=
+ window.SpeechRecognition||
+ window.webkitSpeechRecognition;
 
-  if (t.includes("hola")) {
-    answer("Hola. Es un placer escucharte. ¿Qué necesitas?");
-  }
+ if(!Recognition){
+ answer("Tu navegador no admite reconocimiento de voz.");
+ return;
+ }
 
-  else if (t.includes("hora")) {
-    const hour = new Date().toLocaleTimeString("es-AR", {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-    answer("La hora actual es " + hour);
-  }
+ const recognition=new Recognition();
+ recognition.lang="es-AR";
+ recognition.continuous=false;
 
-  else if (t.includes("fecha")) {
-    const date = new Date().toLocaleDateString("es-AR");
-    answer("Hoy es " + date);
-  }
+ statusText.innerText="ESCUCHANDO...";
 
-  else if (t.includes("spotify")) {
-    answer("Abriendo Spotify.");
-    window.open("https://open.spotify.com", "_blank");
-  }
+ recognition.onresult=function(event){
+ const text=event.results[0][0].transcript;
+ message.value=text;
+ command(text);
+ };
 
-  else if (t.includes("youtube")) {
-    answer("Abriendo YouTube.");
-    window.open("https://youtube.com", "_blank");
-  }
+ recognition.onerror=function(){
+ answer("No pude reconocer tu voz. Intentá nuevamente.");
+ };
 
-  else if (t.includes("whatsapp")) {
-    answer("Abriendo WhatsApp. Podés elegir un contacto y escribir tu mensaje.");
-    window.open("https://wa.me/", "_blank");
-  }
+ recognition.onend=function(){
+ statusText.innerText="SISTEMA ACTIVO";
+ };
 
-  else if (t.includes("mensaje")) {
-    const msg = encodeURIComponent(text);
-    answer("Preparando un mensaje. Elegí el contacto y revisalo antes de enviarlo.");
-    window.open("https://wa.me/?text=" + msg, "_blank");
-  }
-
-  else if (t.includes("cómo estás")) {
-    answer("Todos mis sistemas funcionan correctamente. Gracias por preguntar.");
-  }
-
-  else if (t.includes("quién eres")) {
-    answer("Soy JARVIS, tu asistente personal.");
-  }
-
-  else {
-    answer("He recibido tu solicitud. Todavía estoy aprendiendo nuevas funciones.");
-  }
+ try{recognition.start();}
+ catch(e){answer("No pude iniciar el micrófono.");}
 }
+
+function send(){
+ const text=message.value.trim();
+ if(text)command(text);
+}
+
+function command(text){
+
+ const t=text.toLowerCase();
+
+ if(t.includes("hola")){
+ answer("Hola. Estoy a tu disposición. ¿Qué necesitas?");
+ }
+
+ else if(t.includes("qué hora")||t==="hora"){
+ const hour=new Date().toLocaleTimeString("es-AR",{
+ hour:"2-digit",minute:"2-digit"
+ });
+ answer("Actualmente son las "+hour);
+ }
+
+ else if(t.includes("fecha")||t.includes("qué día")){
+ const date=new Date().toLocaleDateString("es-AR");
+ answer("Hoy es "+date);
+ }
+
+ else if(t.includes("cómo estás")){
+ answer("Todos mis sistemas funcionan correctamente.");
+ }
+
+ else if(t.includes("quién eres")){
+ answer("Soy JARVIS, tu asistente personal. Estoy aquí para ayudarte.");
+ }
+
+ else if(t.startsWith("recuerda que")){
+ const detail=text.substring(11).trim();
+ if(detail){
+ remember(detail);
+ answer("Entendido. Recordaré ese dato durante esta sesión.");
+ }else{
+ answer("Decime qué querés que recuerde.");
+ }
+ }
+
+ else if(t.includes("qué recuerdas")){
+ answer(memories.length?
+ "Recuerdo lo siguiente: "+memories.join(". "):
+ "Todavía no me enseñaste ningún dato.");
+ }
+
+ else if(t.includes("spotify")){
+ answer("Abriendo Spotify.");
+ window.open("https://open.spotify.com","_blank");
+ }
+
+ else if(t.includes("youtube")){
+ answer("Abriendo YouTube.");
+ window.open("https://youtube.com","_blank");
+ }
+
+ else if(t.includes("whatsapp")){
+ answer("Abriendo WhatsApp.");
+ window.open("https://wa.me/","_blank");
+ }
+
+ else if(t.includes("mensaje")){
+ const msg=encodeURIComponent(text);
+ answer("Preparé el texto. Elegí el contacto y revisalo antes de enviarlo.");
+ window.open("https://wa.me/?text="+msg,"_blank");
+ }
+
+ else if(t.includes("ayuda")){
+ answer("Puedo decirte la hora, la fecha, abrir Spotify, YouTube y WhatsApp, y recordar datos durante esta sesión.");
+ }
+
+ else{
+ answer("Todavía no tengo una respuesta programada para eso. Podés probar diciendo ayuda.");
+ }
+}
+
+message.addEventListener("keydown",function(e){
+ if(e.key==="Enter")send();
+});
 
 </script>
-
 </body>
 </html>
