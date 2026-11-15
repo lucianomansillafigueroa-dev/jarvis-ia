@@ -1194,5 +1194,73 @@ susanPet.addEventListener("touchcancel", function(){
  <img src="./susan_mascota_pixel.png" alt="SUSAN">
 </button>
 
+<!-- MASCOTA FLOTANTE DE SUSAN -->
+<button id="susanPet" aria-label="Abrir SUSAN">
+ <img src="./susan_mascota_pixel.png" alt="SUSAN">
+</button>
+
+<script>
+// MOVIMIENTO TÁCTIL DE SUSAN
+
+const susanPet = document.getElementById("susanPet");
+
+let movingSusan = false;
+let movedSusan = false;
+let startX = 0;
+let startY = 0;
+
+susanPet.addEventListener("touchstart", function(e){
+ e.preventDefault();
+ movingSusan = true;
+ movedSusan = false;
+ startX = e.touches[0].clientX;
+ startY = e.touches[0].clientY;
+}, { passive: false });
+
+susanPet.addEventListener("touchmove", function(e){
+ if(!movingSusan) return;
+ e.preventDefault();
+
+ const touch = e.touches[0];
+ const dx = touch.clientX - startX;
+ const dy = touch.clientY - startY;
+
+ if(Math.abs(dx) > 3 || Math.abs(dy) > 3){
+  movedSusan = true;
+ }
+
+ if(movedSusan){
+  const rect = susanPet.getBoundingClientRect();
+
+  let left = Math.max(0, Math.min(rect.left + dx, window.innerWidth - rect.width));
+  let top = Math.max(0, Math.min(rect.top + dy, window.innerHeight - rect.height));
+
+  susanPet.style.left = left + "px";
+  susanPet.style.top = top + "px";
+  susanPet.style.right = "auto";
+  susanPet.style.bottom = "auto";
+
+  startX = touch.clientX;
+  startY = touch.clientY;
+ }
+}, { passive: false });
+
+susanPet.addEventListener("touchend", function(){
+ movingSusan = false;
+
+ if(!movedSusan){
+  document.getElementById("chat").scrollIntoView({
+   behavior: "smooth",
+   block: "center"
+  });
+  question.focus();
+ }
+});
+
+susanPet.addEventListener("touchcancel", function(){
+ movingSusan = false;
+});
+</script>
+
 </body>
 </html>
