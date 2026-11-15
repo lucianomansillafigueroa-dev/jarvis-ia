@@ -162,6 +162,30 @@ footer{
   transform: translateY(0);
  }
 }
+/* MASCOTA PIXELADA SUSAN */
+
+#susanPet {
+ position: fixed;
+ bottom: 25px;
+ right: 18px;
+ width: 75px;
+ height: 75px;
+ border: 2px solid #45caff;
+ border-radius: 14px;
+ background: #07172b;
+ color: white;
+ font-size: 38px;
+ cursor: pointer;
+ z-index: 9999;
+ box-shadow: 0 0 18px #00aaff;
+ image-rendering: pixelated;
+ animation: susanFloat 2s ease-in-out infinite;
+}
+
+@keyframes susanFloat {
+ 0%, 100% { transform: translateY(0); }
+ 50% { transform: translateY(-8px); }
+}
 </style>
 </head>
 
