@@ -448,6 +448,46 @@ function saveMemory(data){
 // =====================================
 // 8. MOTOR DE RESPUESTAS
 // =====================================
+
+// RELOJ MUNDIAL DE SUSAN
+
+function worldClock(input){
+
+ const q = normalize(input);
+
+ if(!/hora|reloj|compar/.test(q)) return null;
+
+ const cities = [
+  {names:["argentina","buenos aires"], name:"Buenos Aires", zone:"America/Argentina/Buenos_Aires"},
+  {names:["nueva york","new york","estados unidos","eeuu"], name:"Nueva York (EE. UU.)", zone:"America/New_York"},
+  {names:["londres","inglaterra","reino unido"], name:"Londres", zone:"Europe/London"},
+  {names:["espana","madrid"], name:"Madrid", zone:"Europe/Madrid"},
+  {names:["japon","tokio"], name:"Tokio", zone:"Asia/Tokyo"},
+  {names:["brasil","sao paulo"], name:"São Paulo", zone:"America/Sao_Paulo"}
+ ];
+
+ const found = cities.filter(city =>
+  city.names.some(name => q.includes(name))
+ );
+
+ if(found.length === 0) return null;
+
+ const results = found.map(city => {
+
+  const time = new Intl.DateTimeFormat("es-AR", {
+   timeZone: city.zone,
+   hour: "2-digit",
+   minute: "2-digit",
+   hourCycle: "h23"
+  }).format(new Date());
+
+  return city.name + ": " + time;
+
+ });
+
+ return "🕒 HORARIO MUNDIAL\n\n" + results.join("\n");
+}
+
 function answer(input){
 
  const q=normalize(input);
@@ -530,7 +570,12 @@ function answer(input){
   }
 
  }
+// RELOJ MUNDIAL
+const clockResponse = worldClock(q);
 
+if(clockResponse){
+ return clockResponse;
+}
  return "Todavía no tengo esa respuesta en mi base de conocimientos. Pero no te preocupes, sigo aprendiendo. 😏 Podés enseñármela con el botón ENSEÑAR.";
 
 }
