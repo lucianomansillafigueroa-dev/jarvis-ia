@@ -502,6 +502,7 @@ function addMessage(text,type){
 // 10. ENVIAR MENSAJES
 // =====================================
 
+
 function sendMessage(){
 
  const text = question.value.trim();
@@ -510,6 +511,30 @@ function sendMessage(){
 
  addMessage(text,"user");
  question.value = "";
+
+ // INDICADOR DE PENSAMIENTO
+ const thinking = document.createElement("div");
+ thinking.className = "message bot thinking";
+ thinking.id = "thinking";
+ thinking.innerHTML = "SUSAN está procesando<span class='dots'>...</span>";
+
+ document.getElementById("chat").appendChild(thinking);
+
+ function finishThinking(response){
+
+  setTimeout(function(){
+
+   const indicator = document.getElementById("thinking");
+
+   if(indicator) indicator.remove();
+
+   lastAnswer = response;
+   addMessage(response,"bot");
+   speakLast();
+
+  },900);
+
+ }
 
  // SPOTIFY
  const spotifyMatch = text.match(
@@ -521,12 +546,13 @@ function sendMessage(){
   const song = spotifyMatch[1].trim();
   const response = "Abriendo Spotify para buscar: " + song;
 
-  lastAnswer = response;
-  addMessage(response,"bot");
-  speakLast();
+  finishThinking(response);
 
   const url = "spotify:search:" + encodeURIComponent(song);
-  window.location.href = url;
+
+  setTimeout(function(){
+   window.location.href = url;
+  },1200);
 
   return;
  }
@@ -545,9 +571,7 @@ function sendMessage(){
    "Preparé el mensaje para " + contact +
    ". Ahora elegí WhatsApp y después el contacto.";
 
-  lastAnswer = response;
-  addMessage(response,"bot");
-  speakLast();
+  finishThinking(response);
 
   if(navigator.share){
 
@@ -575,9 +599,7 @@ function sendMessage(){
  // RESPUESTA NORMAL
  const response = answer(text);
 
- lastAnswer = response;
- addMessage(response,"bot");
- speakLast();
+ finishThinking(response);
 
 }
 
