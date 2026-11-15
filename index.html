@@ -452,12 +452,13 @@ function saveMemory(data){
 
 function answer(input){
 
-// PSICOLOGÍA AVANZADA
-if(psychology[q]){
- return addHumor(psychology[q]);
-}
  const q=normalize(input);
  const memory=getMemory();
+
+ // PSICOLOGÍA AVANZADA
+ if(psychology[q]){
+  return addHumor(psychology[q]);
+ }
 
  // PERSONALIDAD DE SUSAN
  const jokes = [
