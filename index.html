@@ -449,16 +449,10 @@ function saveMemory(data){
 // =====================================
 // 8. MOTOR DE RESPUESTAS
 // =====================================
-
 function answer(input){
 
  const q=normalize(input);
  const memory=getMemory();
-
- // PSICOLOGÍA AVANZADA
- if(psychology[q]){
-  return addHumor(psychology[q]);
- }
 
  // PERSONALIDAD DE SUSAN
  const jokes = [
@@ -471,6 +465,11 @@ function answer(input){
 
  function addHumor(response){
   return response + jokes[Math.floor(Math.random()*jokes.length)];
+ }
+
+ // PSICOLOGÍA AVANZADA
+ if(psychology[q]){
+  return addHumor(psychology[q]);
  }
 
  // Memoria enseñada
