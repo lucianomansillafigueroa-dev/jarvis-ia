@@ -521,15 +521,43 @@ function answer(input){
 
 function addMessage(text,type){
 
- const div=document.createElement("div");
+ const div = document.createElement("div");
 
- div.className="message "+type;
-
- div.textContent=text;
+ div.className = "message " + type;
 
  chat.appendChild(div);
 
- chat.scrollTop=chat.scrollHeight;
+ if(type === "bot"){
+
+  let index = 0;
+
+  const speed = 22;
+
+  function write(){
+
+   if(index < text.length){
+
+    div.textContent += text.charAt(index);
+
+    index++;
+
+    chat.scrollTop = chat.scrollHeight;
+
+    setTimeout(write,speed);
+
+   }
+
+  }
+
+  write();
+
+ } else {
+
+  div.textContent = text;
+
+ }
+
+ chat.scrollTop = chat.scrollHeight;
 
 }
 
