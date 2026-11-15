@@ -1106,7 +1106,7 @@ const psychology = {
  "Es la capacidad de analizar información, evaluar evidencias y cuestionar conclusiones antes de aceptarlas."
 
 };
-// INTERACCIÓN Y MOVIMIENTO DE LA MASCOTA SUSAN
+// MOVIMIENTO TÁCTIL DE SUSAN
 
 const susanPet = document.getElementById("susanPet");
 
@@ -1115,26 +1115,30 @@ let movedSusan = false;
 let startX = 0;
 let startY = 0;
 
-susanPet.addEventListener("pointerdown", function(e){
+susanPet.addEventListener("touchstart", function(e){
+
+ e.preventDefault();
 
  movingSusan = true;
  movedSusan = false;
 
- startX = e.clientX;
- startY = e.clientY;
+ startX = e.touches[0].clientX;
+ startY = e.touches[0].clientY;
 
- susanPet.setPointerCapture(e.pointerId);
+}, { passive: false });
 
-});
-
-susanPet.addEventListener("pointermove", function(e){
+susanPet.addEventListener("touchmove", function(e){
 
  if(!movingSusan) return;
 
- const dx = e.clientX - startX;
- const dy = e.clientY - startY;
+ e.preventDefault();
 
- if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
+ const touch = e.touches[0];
+
+ const dx = touch.clientX - startX;
+ const dy = touch.clientY - startY;
+
+ if(Math.abs(dx) > 3 || Math.abs(dy) > 3){
   movedSusan = true;
  }
 
@@ -1142,32 +1146,33 @@ susanPet.addEventListener("pointermove", function(e){
 
   const rect = susanPet.getBoundingClientRect();
 
-  let left = rect.left + dx;
-  let top = rect.top + dy;
+  let left = Math.max(0, Math.min(
+   rect.left + dx,
+   window.innerWidth - rect.width
+  ));
 
-  left = Math.max(0, Math.min(left, window.innerWidth - rect.width));
-  top = Math.max(0, Math.min(top, window.innerHeight - rect.height));
+  let top = Math.max(0, Math.min(
+   rect.top + dy,
+   window.innerHeight - rect.height
+  ));
 
   susanPet.style.left = left + "px";
   susanPet.style.top = top + "px";
   susanPet.style.right = "auto";
   susanPet.style.bottom = "auto";
 
-  startX = e.clientX;
-  startY = e.clientY;
+  startX = touch.clientX;
+  startY = touch.clientY;
  }
 
-});
+}, { passive: false });
 
-susanPet.addEventListener("pointerup", function(){
+susanPet.addEventListener("touchend", function(){
 
  movingSusan = false;
 
  if(!movedSusan){
-
-  const chat = document.getElementById("chat");
-
-  chat.scrollIntoView({
+  document.getElementById("chat").scrollIntoView({
    behavior: "smooth",
    block: "center"
   });
@@ -1177,7 +1182,7 @@ susanPet.addEventListener("pointerup", function(){
 
 });
 
-susanPet.addEventListener("pointercancel", function(){
+susanPet.addEventListener("touchcancel", function(){
  movingSusan = false;
 });
 </script>
