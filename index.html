@@ -5,61 +5,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050b14">
-<title>SUSAN AI</title>
+<title>SUSAN AI 7.0</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  background:#050b14;
  color:#eaf6ff;
  font-family:Arial,sans-serif;
- min-height:100vh;
 }
+
 header{
  text-align:center;
- padding:25px 15px 15px;
- border-bottom:1px solid #12334b;
+ padding:25px 10px;
+ border-bottom:1px solid #16415c;
 }
+
 .logo{
- font-size:35px;
+ font-size:34px;
  font-weight:bold;
  letter-spacing:5px;
  color:#40cfff;
  text-shadow:0 0 18px #008cff;
 }
-.subtitle{color:#7298b4;font-size:12px;margin-top:7px}
-.status{color:#42e6a4;font-size:12px;margin-top:12px}
-main{max-width:750px;margin:auto;padding:15px}
+
+.subtitle{
+ color:#7298b4;
+ font-size:12px;
+ margin-top:8px;
+}
+
+.status{
+ color:#42e6a4;
+ font-size:12px;
+ margin-top:12px;
+}
+
+main{
+ max-width:750px;
+ margin:auto;
+ padding:15px;
+}
+
 #chat{
  height:55vh;
  min-height:300px;
  overflow-y:auto;
  padding:12px;
  background:#081522;
- border:1px solid #12334b;
+ border:1px solid #16415c;
  border-radius:14px;
 }
+
 .message{
- padding:12px 14px;
+ padding:13px;
  margin:10px 0;
  border-radius:12px;
  line-height:1.5;
  white-space:pre-wrap;
  overflow-wrap:anywhere;
 }
+
 .bot{
  background:#10283b;
  border-left:3px solid #32c8ff;
- margin-right:25px;
+ margin-right:20px;
 }
+
 .user{
  background:#123b54;
  border-right:3px solid #32c8ff;
- margin-left:25px;
+ margin-left:20px;
  text-align:right;
 }
-.controls{display:flex;gap:8px;margin-top:12px}
+
+.controls{
+ display:flex;
+ gap:8px;
+ margin-top:12px;
+}
+
 input{
  flex:1;
  min-width:0;
@@ -71,6 +98,7 @@ input{
  outline:none;
  font-size:15px;
 }
+
 button{
  background:#087eae;
  color:white;
@@ -80,19 +108,30 @@ button{
  font-weight:bold;
  cursor:pointer;
 }
-button:active{opacity:.7}
+
 .actions{
  display:flex;
  flex-wrap:wrap;
  gap:8px;
  margin-top:12px;
 }
-.actions button{background:#102c40;border:1px solid #1c5474}
-footer{text-align:center;color:#55758d;font-size:11px;padding:20px}
+
+.actions button{
+ background:#102c40;
+ border:1px solid #1c5474;
+}
+
+footer{
+ text-align:center;
+ color:#55758d;
+ font-size:11px;
+ padding:20px;
+}
 </style>
 </head>
 
 <body>
+
 <header>
  <div class="logo">SUSAN AI</div>
  <div class="subtitle">SISTEMA DE ASISTENCIA Y CONOCIMIENTO</div>
@@ -100,90 +139,135 @@ footer{text-align:center;color:#55758d;font-size:11px;padding:20px}
 </header>
 
 <main>
+
  <div id="chat">
   <div class="message bot">
-   Hola. Soy SUSAN, tu asistente personal.<br>
-   ¿En qué puedo ayudarte?
+   Hola. Soy SUSAN AI 7.0.
+   Estoy lista para ayudarte.
   </div>
  </div>
 
  <div class="controls">
-  <input id="question" type="text" placeholder="Escribí tu pregunta..."
+  <input id="question" type="text"
+   placeholder="Escribí tu pregunta..."
    autocomplete="off">
-  <button onclick="sendMessage()">ENVIAR</button>
+  <button type="button" id="send">ENVIAR</button>
  </div>
 
  <div class="actions">
-  <button onclick="teach()">ENSEÑAR</button>
-  <button onclick="speakLast()">🔊 VOZ</button>
-  <button onclick="clearChat()">LIMPIAR</button>
+  <button type="button" id="teach">ENSEÑAR</button>
+  <button type="button" id="voice">🔊 VOZ</button>
+  <button type="button" id="clear">LIMPIAR</button>
  </div>
+
 </main>
 
-<footer>SUSAN AI 6.0 · ASISTENTE PERSONAL</footer>
+<footer>SUSAN AI 7.0 · ASISTENTE PERSONAL</footer>
 
 <script>
-// ==================================
-// 1. ELEMENTOS DE LA INTERFAZ
-// ==================================
+
+// =====================================
+// 1. REFERENCIAS
+// =====================================
 
 const chat = document.getElementById("chat");
 const question = document.getElementById("question");
 
 let lastAnswer = "";
 
-// ==================================
-// 2. BASE DE CONOCIMIENTOS
-// ==================================
+// =====================================
+// 2. CONOCIMIENTOS
+// =====================================
 
 const knowledge = {
- "hola": "Hola. ¿En qué puedo ayudarte?",
- "buenos dias": "¡Buenos días! Estoy lista para ayudarte.",
- "buenas tardes": "¡Buenas tardes! ¿Qué necesitás?",
- "buenas noches": "¡Buenas noches! ¿En qué puedo ayudarte?",
- "como estas": "Estoy funcionando correctamente. Gracias por preguntar.",
- "quien sos": "Soy SUSAN AI, un asistente personal creado para responder preguntas y aprender nuevos conocimientos.",
- "quien te creo": "Fui creada por Luciano.",
- "que podes hacer": "Puedo responder preguntas de cultura general, resolver cálculos, buscar información en mi base de conocimientos y aprender respuestas nuevas.",
- "que es la inteligencia artificial": "La inteligencia artificial es una tecnología que permite que los sistemas informáticos realicen tareas que normalmente requieren capacidades humanas, como reconocer patrones, procesar lenguaje y resolver problemas.",
- "que es un atomo": "Un átomo es la unidad básica de la materia. Está formado por protones, neutrones y electrones.",
- "que es la gravedad": "La gravedad es una fuerza de atracción entre los cuerpos que tienen masa.",
- "que es la fotosintesis": "La fotosíntesis es el proceso por el cual las plantas utilizan la luz solar, el agua y el dióxido de carbono para producir alimento y liberar oxígeno.",
- "que es el adn": "El ADN es la molécula que contiene la información genética de los seres vivos.",
- "capital de argentina": "La capital de Argentina es Buenos Aires.",
- "capital de alemania": "La capital de Alemania es Berlín.",
- "capital de francia": "La capital de Francia es París.",
- "capital de españa": "La capital de España es Madrid.",
- "capital de italia": "La capital de Italia es Roma.",
- "capital de brasil": "La capital de Brasil es Brasilia.",
- "capital de chile": "La capital de Chile es Santiago.",
- "capital de uruguay": "La capital de Uruguay es Montevideo.",
- "capital de paraguay": "La capital de Paraguay es Asunción.",
- "capital de japon": "La capital de Japón es Tokio.",
- "capital de china": "La capital de China es Pekín.",
- "capital de rusia": "La capital de Rusia es Moscú.",
- "capital de reino unido": "La capital del Reino Unido es Londres.",
- "capital de estados unidos": "La capital de Estados Unidos es Washington D. C.",
- "capital de mexico": "La capital de México es Ciudad de México.",
- "capital de canada": "La capital de Canadá es Ottawa.",
- "capital de australia": "La capital de Australia es Canberra.",
- "capital de portugal": "La capital de Portugal es Lisboa.",
- "capital de colombia": "La capital de Colombia es Bogotá.",
- "capital de peru": "La capital de Perú es Lima.",
- "capital de bolivia": "La capital de Bolivia es Sucre. La sede del gobierno está en La Paz.",
- "capital de egipto": "La capital de Egipto es El Cairo.",
- "capital de india": "La capital de India es Nueva Delhi.",
- "capital de corea del sur": "La capital de Corea del Sur es Seúl.",
- "capital de noruega": "La capital de Noruega es Oslo.",
- "capital de suecia": "La capital de Suecia es Estocolmo.",
- "capital de grecia": "La capital de Grecia es Atenas.",
- "capital de turquia": "La capital de Turquía es Ankara.",
- "capital de suiza": "La capital de Suiza es Berna."
+
+ "hola":"Hola. ¿En qué puedo ayudarte?",
+
+ "buenos dias":"¡Buenos días! Estoy lista para ayudarte.",
+
+ "buenas tardes":"¡Buenas tardes! ¿Qué necesitás?",
+
+ "buenas noches":"¡Buenas noches!",
+
+ "como estas":"Estoy funcionando correctamente.",
+
+ "quien sos":"Soy SUSAN AI, un asistente personal programado para responder preguntas y aprender nuevos conocimientos.",
+
+ "quien te creo":"Fui creada por Luciano.",
+
+ "que es la inteligencia artificial":"La inteligencia artificial es una tecnología que permite a las computadoras realizar tareas que normalmente requieren capacidades humanas.",
+
+ "que es un atomo":"Un átomo es la unidad básica de la materia. Está formado por protones, neutrones y electrones.",
+
+ "que es la gravedad":"La gravedad es la atracción que existe entre los cuerpos que tienen masa.",
+
+ "que es la fotosintesis":"Es el proceso por el cual las plantas utilizan luz solar, agua y dióxido de carbono para producir alimento y liberar oxígeno.",
+
+ "que es el adn":"El ADN es una molécula que contiene la información genética de los seres vivos.",
+
+ "capital de argentina":"La capital de Argentina es Buenos Aires.",
+
+ "capital de alemania":"La capital de Alemania es Berlín.",
+
+ "capital de francia":"La capital de Francia es París.",
+
+ "capital de españa":"La capital de España es Madrid.",
+
+ "capital de italia":"La capital de Italia es Roma.",
+
+ "capital de brasil":"La capital de Brasil es Brasilia.",
+
+ "capital de chile":"La capital de Chile es Santiago.",
+
+ "capital de uruguay":"La capital de Uruguay es Montevideo.",
+
+ "capital de paraguay":"La capital de Paraguay es Asunción.",
+
+ "capital de japon":"La capital de Japón es Tokio.",
+
+ "capital de china":"La capital de China es Pekín.",
+
+ "capital de rusia":"La capital de Rusia es Moscú.",
+
+ "capital de reino unido":"La capital del Reino Unido es Londres.",
+
+ "capital de estados unidos":"La capital de Estados Unidos es Washington D. C.",
+
+ "capital de mexico":"La capital de México es Ciudad de México.",
+
+ "capital de canada":"La capital de Canadá es Ottawa.",
+
+ "capital de australia":"La capital de Australia es Canberra.",
+
+ "capital de portugal":"La capital de Portugal es Lisboa.",
+
+ "capital de colombia":"La capital de Colombia es Bogotá.",
+
+ "capital de peru":"La capital de Perú es Lima.",
+
+ "capital de bolivia":"La capital constitucional de Bolivia es Sucre y la sede del gobierno está en La Paz.",
+
+ "capital de egipto":"La capital de Egipto es El Cairo.",
+
+ "capital de india":"La capital de India es Nueva Delhi.",
+
+ "capital de corea del sur":"La capital de Corea del Sur es Seúl.",
+
+ "capital de noruega":"La capital de Noruega es Oslo.",
+
+ "capital de suecia":"La capital de Suecia es Estocolmo.",
+
+ "capital de grecia":"La capital de Grecia es Atenas.",
+
+ "capital de turquia":"La capital de Turquía es Ankara.",
+
+ "capital de suiza":"La capital de Suiza es Berna."
+
 };
 
-// ==================================
-// 3. TABLA PERIÓDICA
-// ==================================
+// =====================================
+// 3. TABLA PERIODICA
+// =====================================
 
 const elements = [
 ["Hidrógeno","H"],["Helio","He"],["Litio","Li"],["Berilio","Be"],
@@ -218,218 +302,338 @@ const elements = [
 ["Teneso","Ts"],["Oganesón","Og"]
 ];
 
-function findElement(query){
- const q = normalize(query);
+// =====================================
+// 4. NORMALIZAR TEXTO
+// =====================================
+
+function normalize(text){
+ return String(text)
+ .toLowerCase()
+ .normalize("NFD")
+ .replace(/[\u0300-\u036f]/g,"")
+ .replace(/[¿?¡!,.;:]/g,"")
+ .trim();
+}
+
+// =====================================
+// 5. BUSCAR ELEMENTOS
+// =====================================
+
+function findElement(value){
+
+ const q=normalize(value);
+
  for(let i=0;i<elements.length;i++){
-  const name=normalize(elements[i][0]);
-  const symbol=normalize(elements[i][1]);
-  if(q===name || q===symbol || q===String(i+1)){
+
+  if(
+   q===normalize(elements[i][0]) ||
+   q===normalize(elements[i][1]) ||
+   q===String(i+1)
+  ){
+
    return {
     name:elements[i][0],
     symbol:elements[i][1],
     number:i+1
    };
+
   }
  }
+
  return null;
 }
 
-// ==================================
-// 4. NORMALIZAR TEXTO
-// ==================================
-
-function normalize(text){
- return String(text)
-  .toLowerCase()
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g,"")
-  .replace(/[¿?¡!,.;:]/g,"")
-  .trim();
-}
-
-// ==================================
-// 5. CALCULADORA
-// ==================================
+// =====================================
+// 6. CALCULADORA
+// =====================================
 
 function calculate(expression){
- let exp=expression
-  .replace(/x/gi,"*")
-  .replace(/÷/g,"/")
-  .replace(/,/g,".");
 
- if(!/^[0-9+\-*/().%\s^]+$/.test(exp)){
+ let exp=expression
+ .replace(/x/gi,"*")
+ .replace(/÷/g,"/")
+ .replace(/,/g,".")
+ .replace(/\^/g,"**");
+
+ if(!/^[0-9+\-*/().%\s*]+$/.test(exp)){
   return null;
  }
 
- exp=exp.replace(/\^/g,"**");
-
  try{
-  const result=Function('"use strict";return ('+exp+')')();
+
+  const result=Function(
+   '"use strict";return ('+exp+')'
+  )();
+
   if(typeof result!=="number" || !Number.isFinite(result)){
-   return "No se puede resolver esa operación.";
+   return null;
   }
-  return Number.isInteger(result)?result:Number(result.toFixed(8));
+
+  return Number.isInteger(result)
+   ?result
+   :Number(result.toFixed(8));
+
  }catch(error){
+
   return null;
+
  }
 }
 
-// ==================================
-// 6. MEMORIA PERSONAL
-// ==================================
+// =====================================
+// 7. MEMORIA
+// =====================================
 
 function getMemory(){
+
  try{
-  return JSON.parse(localStorage.getItem("susanKnowledge")||"{}");
+  return JSON.parse(
+   localStorage.getItem("susanKnowledge") || "{}"
+  );
  }catch(error){
   return {};
  }
+
 }
 
 function saveMemory(data){
- localStorage.setItem("susanKnowledge",JSON.stringify(data));
+
+ try{
+  localStorage.setItem(
+   "susanKnowledge",
+   JSON.stringify(data)
+  );
+  return true;
+ }catch(error){
+  return false;
+ }
+
 }
 
-// ==================================
-// 7. RESPONDER PREGUNTAS
-// ==================================
+// =====================================
+// 8. MOTOR DE RESPUESTAS
+// =====================================
 
 function answer(input){
+
  const q=normalize(input);
  const memory=getMemory();
 
- // Respuestas enseñadas
- for(const key in memory){
-  if(q===key){
-   return memory[key];
-  }
+ // Memoria enseñada
+ if(memory[q]){
+  return memory[q];
  }
 
- // Conocimientos programados
+ // Conocimientos generales
  if(knowledge[q]){
   return knowledge[q];
  }
 
- // Tabla periódica
- const elementMatch=q.match(/(?:elemento|simbolo|numero atomico|atomo)\s+(?:del|de la|de)?\s*(.+)/);
+ // Elementos químicos
+ const elementMatch=q.match(
+  /(?:elemento|simbolo|numero atomico|atomo)\s+(?:del|de la|de)?\s*(.+)/
+ );
+
  if(elementMatch){
+
   const el=findElement(elementMatch[1]);
+
   if(el){
    return el.name+" ("+el.symbol+") tiene número atómico "+el.number+".";
   }
+
  }
 
- // Buscar elemento por nombre o símbolo
  const directElement=findElement(q);
+
  if(directElement){
   return directElement.name+" ("+directElement.symbol+") tiene número atómico "+directElement.number+".";
  }
 
- // Capitales
- if(q.startsWith("capital de ")){
-  const key=q;
-  if(knowledge[key])return knowledge[key];
- }
-
  // Matemáticas
- const mathMatch=q.match(/(?:cuanto es|calcula|resuelve)\s+(.+)/);
+ const mathMatch=q.match(
+  /(?:cuanto es|calcula|resuelve)\s+(.+)/
+ );
+
  if(mathMatch){
+
   const result=calculate(mathMatch[1]);
-  if(result!==null)return "El resultado es "+result+".";
+
+  if(result!==null){
+   return "El resultado es "+result+".";
+  }
+
  }
 
  if(/^[0-9+\-*/().%\s^x÷,]+$/i.test(q) && /\d/.test(q)){
+
   const result=calculate(q);
-  if(result!==null)return "El resultado es "+result+".";
+
+  if(result!==null){
+   return "El resultado es "+result+".";
+  }
+
  }
 
- // Respuestas generales
- if(q.includes("que es") || q.includes("quien fue") || q.includes("que significa")){
-  return "Todavía no tengo esa información en mi base de conocimientos. Podés enseñármela con el botón ENSEÑAR.";
- }
+ return "Todavía no tengo esa respuesta en mi base de conocimientos. Podés enseñármela con el botón ENSEÑAR.";
 
- return "Todavía no conozco la respuesta a esa pregunta. Podés enseñármela con el botón ENSEÑAR y la guardaré para futuras consultas.";
 }
 
-// ==================================
-// 8. CHAT
-// ==================================
+// =====================================
+// 9. MOSTRAR MENSAJES
+// =====================================
 
 function addMessage(text,type){
+
  const div=document.createElement("div");
+
  div.className="message "+type;
+
  div.textContent=text;
+
  chat.appendChild(div);
+
  chat.scrollTop=chat.scrollHeight;
+
 }
 
+// =====================================
+// 10. ENVIAR MENSAJES
+// =====================================
+
 function sendMessage(){
+
  const text=question.value.trim();
+
  if(!text)return;
 
  addMessage(text,"user");
+
  question.value="";
 
  const response=answer(text);
+
  lastAnswer=response;
 
- setTimeout(function(){
-  addMessage(response,"bot");
- },250);
+ addMessage(response,"bot");
+
 }
 
-question.addEventListener("keydown",function(event){
- if(event.key==="Enter")sendMessage();
-});
-
-// ==================================
-// 9. ENSEÑAR A SUSAN
-// ==================================
+// =====================================
+// 11. ENSEÑAR
+// =====================================
 
 function teach(){
- const newQuestion=prompt("¿Qué pregunta querés enseñarme?");
+
+ const newQuestion=prompt(
+  "¿Qué pregunta querés enseñarme?"
+ );
+
  if(!newQuestion || !newQuestion.trim())return;
 
- const newAnswer=prompt("¿Cuál es la respuesta correcta?");
+ const newAnswer=prompt(
+  "¿Cuál es la respuesta correcta?"
+ );
+
  if(!newAnswer || !newAnswer.trim())return;
 
  const memory=getMemory();
- memory[normalize(newQuestion)]=newAnswer.trim();
- saveMemory(memory);
 
- addMessage("He aprendido una nueva respuesta: "+newQuestion,"user");
- addMessage("Información guardada correctamente. La recordaré en este navegador.","bot");
+ memory[normalize(newQuestion)]=newAnswer.trim();
+
+ if(saveMemory(memory)){
+
+  addMessage(
+   "Nueva pregunta: "+newQuestion,
+   "user"
+  );
+
+  addMessage(
+   "¡Aprendido! Guardé esa respuesta.",
+   "bot"
+  );
+
+ }else{
+
+  addMessage(
+   "No pude guardar la información en este navegador.",
+   "bot"
+  );
+
+ }
+
 }
 
-// ==================================
-// 10. VOZ
-// ==================================
+// =====================================
+// 12. VOZ
+// =====================================
 
 function speakLast(){
+
  if(!lastAnswer){
-  lastAnswer="No hay ninguna respuesta para leer.";
+  addMessage("Todavía no tengo una respuesta para leer.","bot");
+  return;
  }
+
  if(!("speechSynthesis" in window)){
-  addMessage("La lectura por voz no está disponible en este navegador.","bot");
+  addMessage("La lectura por voz no está disponible.","bot");
   return;
  }
 
  speechSynthesis.cancel();
+
  const speech=new SpeechSynthesisUtterance(lastAnswer);
+
  speech.lang="es-AR";
  speech.rate=1;
+
  speechSynthesis.speak(speech);
+
 }
 
-// ==================================
-// 11. LIMPIAR CHAT
-// ==================================
+// =====================================
+// 13. LIMPIAR
+// =====================================
 
 function clearChat(){
+
  chat.innerHTML="";
- addMessage("Conversación reiniciada. ¿En qué puedo ayudarte?","bot");
+
+ addMessage(
+  "Conversación reiniciada. ¿En qué puedo ayudarte?",
+  "bot"
+ );
+
  lastAnswer="";
+
 }
+
+// =====================================
+// 14. CONECTAR BOTONES
+// =====================================
+
+document.getElementById("send")
+ .addEventListener("click",sendMessage);
+
+document.getElementById("teach")
+ .addEventListener("click",teach);
+
+document.getElementById("voice")
+ .addEventListener("click",speakLast);
+
+document.getElementById("clear")
+ .addEventListener("click",clearChat);
+
+question.addEventListener("keydown",function(event){
+
+ if(event.key==="Enter"){
+  event.preventDefault();
+  sendMessage();
+ }
+
+});
+
 </script>
+
 </body>
 </html>
